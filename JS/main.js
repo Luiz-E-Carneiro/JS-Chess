@@ -5,34 +5,36 @@ var possibleCastle = { left: null, right: null }
 var possiblePlays = []
 var currentObj = ''
 
-boardObj.forEach(line => {
-    line.forEach(obj => {
-        let cell = obj.cell 
-        cell.addEventListener('click', function () {
-            if(gameEnded) return
-            if (obj.castle) {
-                castle(obj)
-                player === 'Player1' ? player = 'Player2' : player = 'Player1'
-            } else if (obj.possibleMove) {
-                movePiece(obj)
-                refrash()
-                player === 'Player1' ? player = 'Player2' : player = 'Player1'
-            } else {
-                if (currentObj === obj) {
-                    currentObj = ''
+const allowPlay = () => {
+    boardObj.forEach(line => {
+        line.forEach(obj => {
+            let cell = obj.cell
+            cell.addEventListener('click', function () {
+                if (gameEnded) return
+                if (obj.castle) {
+                    castle(obj)
+                    player === 'Player1' ? player = 'Player2' : player = 'Player1'
+                } else if (obj.possibleMove) {
+                    movePiece(obj)
                     refrash()
+                    player === 'Player1' ? player = 'Player2' : player = 'Player1'
                 } else {
-                    currentObj = obj
-                    if (verifiPlayerTime(obj.piece.color) && !obj.cannotMove ) {
-                        if(!needHelp(obj)) verificCell(currentObj)
-                    } else{
+                    if (currentObj === obj) {
+                        currentObj = ''
                         refrash()
+                    } else {
+                        currentObj = obj
+                        if (verifiPlayerTime(obj.piece.color) && !obj.cannotMove) {
+                            if (!needHelp(obj)) verificCell(currentObj)
+                        } else {
+                            refrash()
+                        }
                     }
                 }
-            }
-        })
+            })
+        });
     });
-});
+}
 
 const verificCell = (divObj) => {
     refrash()

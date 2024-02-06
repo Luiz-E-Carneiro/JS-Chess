@@ -89,29 +89,26 @@ body {
     gap: 1.5em;
 }
 
-.reset--btn {
-    max-width: 10em;
-    padding: 10px;
-    font-size: 1rem;
-    background-color: var(--black_cell);
-    border: 1px solid var(--white_cell);
-    color: whitesmoke;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: .1s ease-in-out;
-}
-
-.reset--btn:hover {
-    background-color: var(--white_cell);
-    border: 1px solid var(--black_cell);
-    color: rgba(0, 0, 0, 0.66);
-}
-
 .scoreboard--area * {
     color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.scoreboard--area {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.scoreboard--area h4, .scoreboard--area p{
+    font-size: 1.4rem;
+}
+
+.scoreboard--area > div {
+    display: flex;
+    gap: .8em;
+    font-size: 1.3rem;
 }
 
 .board--styles {
@@ -120,6 +117,10 @@ body {
     align-items: center;
     gap: 2em;
     color: white;
+}
+
+.board--styles h4{
+    font-size: 1.4rem;
 }
 
 .board--styles > div {
@@ -173,7 +174,7 @@ body {
 ._3Dboard::before {
     content: '';
     position: absolute;
-    right: 23.1px;
+    right: 23.5px;
     height: 7px;
     width: 100%;
     background: linear-gradient(90deg, var(--white_cell) 0%, var(--white_cell) 50%, var(--black_cell) 50%, var(--black_cell) 100%);
@@ -245,15 +246,27 @@ body {
     gap: 1em;
 }
 
-.play--again--btn {
+.result--area{
+    width: 100%;
+    height: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result{
+    color: white;
+    font-size: 1.6rem;
+}
+
+
+
+.play--again--btn, .reset--btn {
     padding: 10px;
     color: #f5f5f5;
     font-weight: 600;
     text-transform: capitalize;
-    border: 2px solid #147355;
     border-radius: 7px;
-    background-color: #12a34b;
-    box-shadow: -5px 5px 0 #147355;
     user-select: none;
     cursor: pointer;
     display: flex;
@@ -261,6 +274,33 @@ body {
     align-items: center;
     gap: .3em;
     transition: all .3s;
+}
+
+.reset--btn{
+    border: 2px solid var(--black_cell);
+    background-color: var(--white_cell);
+    box-shadow: -5px 5px 0 var(--black_cell); 
+}
+
+.reset--btn:hover {
+    border-color: var(--white_cell);
+    background-color: var(--black_cell);
+    color: var(--white_cell);
+    box-shadow: -5px 5px 0 var(--white_cell);
+}
+
+.reset--btn:active {
+    border-color:var(--black_cell);
+    background-color: var(--white_cell);
+    color: #f5f5f5;
+    transform: translateX(-5px) translateY(5px);
+    box-shadow: none;
+}
+
+.play--again--btn{
+    border: 2px solid #147355;
+    background-color: #12a34b;
+    box-shadow: -5px 5px 0 #147355;    
 }
 
 .play--again--btn:hover {
@@ -282,6 +322,72 @@ body {
     animation: rotate360 1s ease-in-out infinite;
 
 }
+
+.action--btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.offer--draw {
+    background-color: #a9a9a9;
+    padding-right: 15px;
+}
+
+.give--up{
+    background-color: #d1120b;
+    padding-right: 25px;
+}
+
+.action--btn {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    transition: width 0.3s ease; 
+    width: 40px; 
+    height: 3em;
+    position: relative;
+    display: flex;
+    justify-content: end;
+}
+
+.action--btn:hover {
+    width: 120px; 
+}
+.action--btn:hover .text {
+    display: inline-block;
+}
+
+.action--btn .material-symbols-outlined {
+    font-size: 24px; 
+    position: absolute;
+    left: 20px;
+    transform: translateX(-50%);
+    padding: 9px;
+    overflow: hidden;
+}
+
+.give--up .material-symbols-outlined {
+    background: rgb(209,18,11);
+    background: linear-gradient(90deg, rgba(209,18,11,1) 80%, rgba(0,212,255,0) 100%);
+}
+
+.offer--draw .material-symbols-outlined{
+    background: rgb(169,169,169);
+    background: linear-gradient(90deg, rgba(169,169,169,1) 80%, rgba(169,169,169,1) 100%);
+}
+
+.action--btn .text {
+    display: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
 
 @keyframes rotate360 {
     from {

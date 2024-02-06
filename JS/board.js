@@ -1,4 +1,4 @@
-var boardObj = [
+const patternBoard = [
     // Line 1
     [
         { piece: { name: 'rook', color: 'black', firstPlay: false, src: "./../assets/pieces/rookB.png" } },
@@ -95,6 +95,7 @@ var boardObj = [
         { piece: { name: 'rook', color: 'white', firstPlay: false, src: "./../assets/pieces/rookW.png" } }
     ]
 ]
+var boardObj = JSON.parse(JSON.stringify(patternBoard))
 
 const numbersDiv = document.getElementsByClassName('numbers')
 const letterDiv = document.getElementsByClassName('letters')
@@ -124,6 +125,7 @@ const realoadBoard = () => {
     putPieces()
     createNumbers(allCells);
     createLetters(allCells);
+    allowPlay()
 }
 
 const createNumbers = (allCells) => {

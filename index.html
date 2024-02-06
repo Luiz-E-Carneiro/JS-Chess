@@ -19,16 +19,16 @@
         <div class="scoreboard--area">
             <h4>ScoreBoard</h4>
             <div>
-                <span id="nameP1">Player 1</span><span>-</span><span id="poitsP1">00</span>
+                <span id="nameP1">Player 1</span><span>-</span><span id="pointsP1">00</span>
                 <span> X </span>
-                <span id="poitsP2">00</span><span>-</span> <span id="nameP2"> Player 2</span>
+                <span id="pointsP2">00</span><span>-</span> <span id="nameP2"> Player 2</span>
             </div>
             <p>Draws:<span>00</span></p>
         </div>
         <button class="reset--btn" id="resetBtn">Reset Scores</button>
 
         <div class="board--styles">
-            <h3>Change Board Style</h3>
+            <h4>Change Board Style</h4>
             <div>
                 <div>
                     <h4>Format:</h4>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="color--area">
                     <h4>Color:</h4>
-                    <div class="default--color">
+                    <div class="default--color" id="defaultColor">
                         <div>
                             <div class="whiteSpot"></div>
                             <div class="blackSpot"></div>
@@ -63,7 +63,7 @@
                             <div class="whiteSpot"></div>
                         </div>
                     </div>
-                    <div class="blue--board">
+                    <div class="blue--board" id="blueColor">
                         <div>
                             <div class="lBlueSpot"></div>
                             <div class="dBlueSpot"></div>
@@ -93,16 +93,22 @@
     <div class="promote--area--black" id="promoteBlackArea">
     </div>
     <div class="right--side">
-        <div class="timer">
-            <h3>Player 2</h3>
+        <div class="players--area">
             <h3>00:00</h3>
-            <button>Give up</button>
-            <button>Offer Draw</button>
+            <h3>Player 2</h3>
+            <span class="material-symbols-outlined">stylus</span>
+            <button class="action--btn give--up">
+                <span class="material-symbols-outlined">flag</span>
+                <span class="text">Give up</span>
+            <button class="action--btn offer--draw" >
+                <span class="material-symbols-outlined">handshake</span>
+                <span class="text">Offer Draw</span>
+            </button>
         </div>
 
         <div class="middle--area">
-            <div>
-                <h2>Winner: Player...</h2>
+            <div class="result--area">
+                <h2 class="result" id="result"></h2>
             </div>
             <button class="play--again--btn" id="playAgainBtn">
                 Play again
@@ -110,17 +116,24 @@
             </button>
         </div>
 
-        <div class="timer">
+        <div class="players--area">
+            <button class="action--btn give--up">
+                <span class="material-symbols-outlined">flag</span>
+                <span class="text">Give up</span>
+            </button>
+            <button class="action--btn offer--draw" >
+                <span class="material-symbols-outlined">handshake</span>
+                <span class="text">Offer Draw</span>
+            </button>
             <h3>Player 1</h3>
+            <span class="material-symbols-outlined">stylus</span>
             <h3>00:00</h3>
-            <button>Give up</button>
-            <button>Offer Draw</button>
         </div>
     </div>
+    <script src="JS/main.js"></script>
     <script src="JS/board.js"></script>
     <script src="JS/logic/moviment.js"></script>
     <script src="JS/logic/path.js"></script>
-    <script src="JS/main.js"></script>
     <script src="JS/logic/interactive.js"></script>
     <script src="JS/logic/validator/check/check.js"></script>
     <script src="JS/logic/validator/check/checkMate.js"></script>
