@@ -1,0 +1,126 @@
+:root {
+    --black_cell: #885e3f;
+    --white_cell: #c8ac74;
+}
+
+.x--Axie {
+    flex: 1;
+    min-width: 33em;
+    height: 28em;
+    display: flex;
+    gap: .5em;
+}
+
+.board {
+    background-color: grey;
+    width: 28em;
+    height: 28em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell {
+    width: calc(100%/8);
+    height: calc(100%/8);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white {
+    background-color: var(--white_cell);
+}
+
+.black {
+    background-color: var(--black_cell);
+}
+
+.topNumber,
+.bottomLetter {
+    font-family: 'Arial';
+    color: #191919;
+}
+
+.topNumber {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: .7rem;
+}
+
+.bottomLetter {
+    font-size: .6rem;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+
+.capture-area {
+    width: 3em;
+    max-width: 3em;
+    max-height: 28em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.hidden {
+    visibility: hidden;
+}
+
+.capture-area:first-of-type{
+    background-color: var(--white_cell);
+}
+.capture-area:last-of-type{
+    background-color: var(--black_cell);
+}
+
+.checkMate{
+    background-color: #b20f0a;
+}
+
+.board3D {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg) skew(15deg);
+    width: 23em;
+    height: 23em;
+    display: flex;
+    flex-wrap: wrap;
+    transition: 0.5s;
+    background-color: grey;
+    box-shadow: -20px 20px 20px white;
+}
+
+.board3D:hover {
+    top: 45%;
+    box-shadow: -40px 40px 50px white;
+}
+
+.board3D::before {
+    content: '';
+    position: absolute;
+    right: calc(23em/1.9);
+    height: 20px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--white_cell) 0%, var(--white_cell) 50%, var(--black_cell) 50%, var(--black_cell) 100%);
+    background-size: calc(23em/4);
+    transform: rotate(90deg) skew(45deg);
+    top: calc(23em/2);
+}
+
+.board3D::after{
+    content: '';
+    position: absolute;
+    top: 23em;
+    height: 20px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--black_cell) 0%, var(--black_cell) 50%, var(--white_cell) 50%, var(--white_cell) 100%);
+    background-size: calc(23em/4);
+    transform: rotate(0deg) skew(-45deg);
+    left: -10px;
+
+}

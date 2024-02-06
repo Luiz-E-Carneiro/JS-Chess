@@ -1,0 +1,32 @@
+
+
+///
+Game:
+
+Rei afogado
+Empate por falta de material
+Empate por 50 movimentos quando apenas possui o rei
+
+Add Timer, real-time scoring, draw fuction (request), switch board styles
+
+Style:
+
+Stylize the board and the its left and right
+
+//////////////////////////////////////////////////////////////////////
+today
+ ||
+ \/
+ 
+Chech Mate:
+
+ChechMate
+Index
+Main
+check
+block_cells
+css:
+board
+overall
+
+add style.js

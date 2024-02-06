@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="CSS/overall.css">
+    <link rel="stylesheet" href="CSS/board.css">
+    <link rel="stylesheet" href="CSS/pieces.css">
+    <link rel="shortcut icon" href="assets/imgs/browserTab.png" type="image/x-icon">
+    <title>Chess</title>
+</head>
+
+<body>
+
+    <div class="left--side">
+        <div class="scoreboard--area">
+            <h4>ScoreBoard</h4>
+            <div>
+                <span id="nameP1">Player 1</span><span>-</span><span id="poitsP1">00</span>
+                <span> X </span>
+                <span id="poitsP2">00</span><span>-</span> <span id="nameP2"> Player 2</span>
+            </div>
+            <p>Draws:<span>00</span></p>
+        </div>
+        <button class="reset--btn" id="resetBtn">Reset Scores</button>
+
+        <div class="board--styles">
+            <h3>Change Board Style</h3>
+            <div>
+                <div>
+                    <h4>Format:</h4>
+                    <div class="style" id="defaultStyle">
+                        <span>Default:</span>
+                        <div class="default--board">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="style" id="_3Dstyle">
+                        <span>3D:</span>
+                        <div class="_3Dboard">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="color--area">
+                    <h4>Color:</h4>
+                    <div class="default--color">
+                        <div>
+                            <div class="whiteSpot"></div>
+                            <div class="blackSpot"></div>
+                        </div>
+                        <div>
+                            <div class="blackSpot"></div>
+                            <div class="whiteSpot"></div>
+                        </div>
+                    </div>
+                    <div class="blue--board">
+                        <div>
+                            <div class="lBlueSpot"></div>
+                            <div class="dBlueSpot"></div>
+                        </div>
+                        <div>
+                            <div class="dBlueSpot"></div>
+                            <div class="lBlueSpot"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="promote--area--white" id="promoteWhiteArea">
+
+    </div>
+    <div class="x--Axie" id="xAxie">
+
+        <div class="capture-area"></div>
+
+        <div class="board" id="board"></div>
+
+        <div class="capture-area"></div>
+
+    </div>
+    <div class="promote--area--black" id="promoteBlackArea">
+    </div>
+    <div class="right--side">
+        <div class="timer">
+            <h3>Player 2</h3>
+            <h3>00:00</h3>
+            <button>Give up</button>
+            <button>Offer Draw</button>
+        </div>
+
+        <div class="middle--area">
+            <div>
+                <h2>Winner: Player...</h2>
+            </div>
+            <button class="play--again--btn" id="playAgainBtn">
+                Play again
+                <span class="material-symbols-outlined">restart_alt</span>
+            </button>
+        </div>
+
+        <div class="timer">
+            <h3>Player 1</h3>
+            <h3>00:00</h3>
+            <button>Give up</button>
+            <button>Offer Draw</button>
+        </div>
+    </div>
+    <script src="JS/board.js"></script>
+    <script src="JS/logic/moviment.js"></script>
+    <script src="JS/logic/path.js"></script>
+    <script src="JS/main.js"></script>
+    <script src="JS/logic/interactive.js"></script>
+    <script src="JS/logic/validator/check/check.js"></script>
+    <script src="JS/logic/validator/check/checkMate.js"></script>
+    <script src="JS/logic/validator/check/help_king.js"></script>
+    <script src="JS/logic/validator/validates.js"></script>
+    <script src="JS/logic/validator/block/path_block.js"></script>
+    <script src="JS/logic/validator/block/block_cells.js"></script>
+    <script src="JS/logic/validator/defender_piece.js"></script>
+    <script src="JS/style.js"></script>
+</body>
+
+</html>
