@@ -49,3 +49,7 @@ resetScoreBtn.addEventListener('click', function(){
     pointsP1.innerText = '00'
     pointsP2.innerText = '00'
 })
+
+// Players' names
+var namePlayer1 = document.getElementById('namePlayer1')
+var namePlayer2 = document.getElementById('namePlayer2')

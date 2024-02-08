@@ -94,16 +94,25 @@
     </div>
     <div class="right--side">
         <div class="players--area">
-            <h3>00:00</h3>
-            <h3>Player 2</h3>
-            <span class="material-symbols-outlined">stylus</span>
-            <button class="action--btn give--up">
-                <span class="material-symbols-outlined">flag</span>
-                <span class="text">Give up</span>
-            <button class="action--btn offer--draw" >
-                <span class="material-symbols-outlined">handshake</span>
-                <span class="text">Offer Draw</span>
-            </button>
+            <div class='timer-btns--area'>
+                <h3 class="timer blackTimer">
+                    <span class="material-symbols-outlined">alarm</span>
+                    00:00
+                </h3>
+                <div>
+                    <button class="action--btn give--up">
+                        <span class="material-symbols-outlined">flag</span>
+                        <span class="text">Give up</span>
+                        <button class="action--btn offer--draw">
+                            <span class="material-symbols-outlined">handshake</span>
+                            <span class="text">Offer Draw</span>
+                        </button>
+                </div>
+            </div>
+            <div class="player--name">
+                <span class="material-symbols-outlined">edit</span>
+                <h3 id="namePlayer1">Player 2</h3>
+            </div>
         </div>
 
         <div class="middle--area">
@@ -117,17 +126,26 @@
         </div>
 
         <div class="players--area">
-            <button class="action--btn give--up">
-                <span class="material-symbols-outlined">flag</span>
-                <span class="text">Give up</span>
-            </button>
-            <button class="action--btn offer--draw" >
-                <span class="material-symbols-outlined">handshake</span>
-                <span class="text">Offer Draw</span>
-            </button>
-            <h3>Player 1</h3>
-            <span class="material-symbols-outlined">stylus</span>
-            <h3>00:00</h3>
+            <div class="player--name">
+                <span class="material-symbols-outlined">edit</span>
+                <h3 id="namePlayer2">Player 1</h3>
+            </div>
+            <div class="timer-btns--area">
+                <h3 class="timer whiteTimer">
+                    <span class="material-symbols-outlined">alarm</span>
+                    00:00
+                </h3>
+                <div>
+                    <button class="action--btn offer--draw">
+                        <span class="material-symbols-outlined">handshake</span>
+                        <span class="text">Offer Draw</span>
+                    </button>
+                    <button class="action--btn give--up">
+                        <span class="material-symbols-outlined">flag</span>
+                        <span class="text">Give up</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="JS/main.js"></script>
