@@ -41,7 +41,7 @@ const pawnPath = (divObj, helpKing = false) => {
 
     if (!helpKing) paintPath(moves, captures)
     else {
-        verificHelp ( moves, captures, divObj )
+        verificHelp(moves, captures, divObj)
     }
 }
 
@@ -58,9 +58,9 @@ const rookPath = (divObj, helpKing = false) => {
 
     if (!helpKing) paintPath(cellsToPaint[0], cellsToPaint[1])
     else {
-        verificHelp ( cellsToPaint[0], cellsToPaint[1], divObj )
+        verificHelp(cellsToPaint[0], cellsToPaint[1], divObj)
     }
-    
+
 }
 
 const knightPath = (divObj, helpKing = false) => {
@@ -94,9 +94,9 @@ const knightPath = (divObj, helpKing = false) => {
 
     if (!helpKing) paintPath(moves, captures)
     else {
-        verificHelp ( moves, captures, divObj )
+        verificHelp(moves, captures, divObj)
     }
-    
+
 }
 
 const bishopPath = (divObj, helpKing = false) => {
@@ -119,7 +119,7 @@ const bishopPath = (divObj, helpKing = false) => {
 
     if (!helpKing) paintPath(cellsToPaint[0], cellsToPaint[1])
     else {
-        verificHelp ( cellsToPaint[0], cellsToPaint[1], divObj )
+        verificHelp(cellsToPaint[0], cellsToPaint[1], divObj)
     }
 
 }
@@ -147,7 +147,10 @@ const kingPath = (divObj, emptySpaces = false, scape = false) => {
             if (color === 'white' && !cell.whiteKingCannotStay) moves.push(cell)
             if (color === 'black' && !cell.blackKingCannotStay) moves.push(cell)
         }
-        else if (cell && cell.piece.color != color && !cell.blackKingCannotStay) captures.push(cell)
+        else if (cell && cell.piece.color != color) {
+            if (color === 'white' && !cell.whiteKingCannotStay) captures.push(cell)
+            if (color === 'black' && !cell.blackKingCannotStay) captures.push(cell)
+        }
     }
     if (scape) {
         return moves.length > 0 || captures.length > 0
@@ -188,10 +191,10 @@ const queenPath = (divObj, helpKing = false) => {
     }
     var allMoves = verticalHorizontal[0].concat(diagonals[0])
     var allCaptures = verticalHorizontal[1].concat(diagonals[1])
-    
+
     if (!helpKing) paintPath(allMoves, allCaptures)
     else {
-        verificHelp ( allMoves, allCaptures, divObj )
+        verificHelp(allMoves, allCaptures, divObj)
     }
 }
 

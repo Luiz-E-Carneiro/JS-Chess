@@ -32,24 +32,41 @@ var currentColor = 'default'
 defaultColor.addEventListener('click', function () {
     if (currentColor === 'default') return
     currentColor = 'default'
-    document.documentElement.style.setProperty('--black_cell', '#885e3f');
-    document.documentElement.style.setProperty('--white_cell', '#c8ac74');
+    document.documentElement.style.setProperty('--black_cell', '#885e3f')
+    document.documentElement.style.setProperty('--white_cell', '#c8ac74')
 })
 
-blueColor.addEventListener('click', function() {
-    if(currentColor === 'blue') return
+blueColor.addEventListener('click', function () {
+    if (currentColor === 'blue') return
     currentColor = 'blue'
-    document.documentElement.style.setProperty('--black_cell', '#0c193b');
-    document.documentElement.style.setProperty('--white_cell', '#0e3dfb78');
+    document.documentElement.style.setProperty('--black_cell', '#0c193b')
+    document.documentElement.style.setProperty('--white_cell', '#0e3dfb78')
 })
 
 // Reset Score
 const resetScoreBtn = document.getElementById('resetBtn')
-resetScoreBtn.addEventListener('click', function(){
+resetScoreBtn.addEventListener('click', function () {
     pointsP1.innerText = '00'
     pointsP2.innerText = '00'
 })
 
-// Players' names
-var namePlayer1 = document.getElementById('namePlayer1')
-var namePlayer2 = document.getElementById('namePlayer2')
+// Timers
+var timerWhite = document.getElementById('timerWhite')
+var timerBlack = document.getElementById('timerBlack')
+
+const timerShaking = () => {
+    if (!gameEnded) {
+        if (player === 'Player1') {
+            timerWhite.style.animation = `shaking 1s linear infinite`
+            timerBlack.style.animation = 'none'
+        } else {
+            timerBlack.style.animation = `shaking 1s linear infinite`
+            timerWhite.style.animation = 'none'
+        }
+
+    }
+    else {
+        timerBlack.style.animation = 'none'
+        timerWhite.style.animation = 'none'
+    }
+}

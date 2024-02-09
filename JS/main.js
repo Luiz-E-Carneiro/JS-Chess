@@ -14,10 +14,12 @@ const allowPlay = () => {
                 if (obj.castle) {
                     castle(obj)
                     player === 'Player1' ? player = 'Player2' : player = 'Player1'
+                    timerShaking()
                 } else if (obj.possibleMove) {
                     movePiece(obj)
                     refrash()
                     player === 'Player1' ? player = 'Player2' : player = 'Player1'
+                    timerShaking()
                 } else {
                     if (currentObj === obj) {
                         currentObj = ''

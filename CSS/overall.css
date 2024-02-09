@@ -408,7 +408,7 @@ body {
 
 .timer span {
     font-size: 1.7rem;
-    animation: shaking 1s linear infinite;
+    animation: none
 }
 
 .whiteTimer {
