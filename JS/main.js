@@ -1,3 +1,4 @@
+var defaultSides = true // Plyer1 = white & Player2 = black
 var player = 'Player1'
 var gameEnded = false
 var helpersDots = []

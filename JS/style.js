@@ -70,3 +70,77 @@ const timerShaking = () => {
         timerWhite.style.animation = 'none'
     }
 }
+
+// Change Names
+var nameWhite = 'Player 1'
+var nameBlack = 'Player 2'
+
+const editWhiteName = document.getElementById('editWhiteName')
+const editBlackName = document.getElementById('editBlackName')
+
+var changingName = false
+
+
+editWhiteName.addEventListener('click', ()=> changeName(editWhiteName, 'white'))
+editBlackName.addEventListener('click', ()=> changeName(editBlackName, 'black'))
+
+function changeName(btn, color) {
+    if(!changingName){
+
+        btn.innerHTML = `<span class="material-symbols-outlined">done_outline</span>`
+
+        let inputName = document.createElement('input')
+        inputName.maxLength = 10
+        inputName.classList.add('inputName')
+        var name
+
+        if(color === 'white'){
+            editBlackName.disabled = true
+            name = document.getElementById('nameWhite')
+            
+        }else {
+            editWhiteName.disabled = true
+            name = document.getElementById('nameBlack')
+        }
+        name.innerHTML = ''
+        name.appendChild(inputName)
+        inputName.focus()
+
+
+    } else {
+        let getInput = document.getElementsByClassName('inputName')[0]
+        if(getInput.value.length === 0) return
+        
+        editBlackName.disabled = false
+        editWhiteName.disabled = false
+
+        let newName = getInput.value
+        let name 
+
+        if(color ===  'white'){
+            btn.innerHTML = `<span class="material-symbols-outlined" id="editWhiteName">edit</span>` 
+            name = document.getElementById('nameWhite')    
+            nameWhite = newName
+        }else {
+            btn.innerHTML = `<span class="material-symbols-outlined" id="editBlackName">edit</span>`
+            name = document.getElementById('nameBlack')
+            nameBlack = newName
+        }
+        name.innerText = newName
+        changeNameBoard()
+    }
+    changingName ? changingName = false : changingName = true
+}
+
+var nameP1 = document.getElementById('nameP1')
+var nameP2 = document.getElementById('nameP2')
+
+const changeNameBoard = () => {
+    if(defaultSides){
+        if(nameP1.innerText !== nameWhite) nameP1.innerText = nameWhite 
+        if(nameP2.innerText !== nameBlack) nameP2.innerText = nameBlack 
+    } else {
+        if(nameP1.innerText !== nameBlack) nameP1.innerText = nameBlack 
+        if(nameP2.innerText !== nameWhite) nameP2.innerText = nameWhite 
+    }
+}

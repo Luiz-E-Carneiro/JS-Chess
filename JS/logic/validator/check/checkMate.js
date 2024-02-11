@@ -9,16 +9,24 @@ const checkMate = (objKing) => {
     endGame.play()
     objKing.cell.classList.add('checkMate')
 
-    result.innerText = `Winner: ${player}`
+    objKing.piece.color === 'white' ? result.innerText = 'Black Won' : result.innerText =  'White won'
 
-    if (player === 'Player1') {
+    if (player === 'Player1' && defaultSides) {
         let score = Number(pointsP1.innerText)
         score++
         score < 9 ? pointsP1.innerText = '0' + score : pointsP1.innerText = score
-    } else {
+    } else if (player === 'Player2' && defaultSides) {
         let score = Number(pointsP2.innerText)
         score++
         score < 9 ? pointsP2.innerText = '0' + score : pointsP2.innerText = score
+    } else if (player === 'Player1' && !defaultSides) {
+        let score = Number(pointsP2.innerText)
+        score++
+        score < 9 ? pointsP2.innerText = '0' + score : pointsP2.innerText = score
+    } else if (player === 'Player2' && !defaultSides) {
+        let score = Number(pointsP1.innerText)
+        score++
+        score < 9 ? pointsP1.innerText = '0' + score : pointsP1.innerText = score
     }
 }
 
@@ -27,12 +35,19 @@ playAgainBtn.addEventListener('click', () => resetGame())
 const resetGame = () => {
     boardArea.innerHTML = ''
     boardObj = JSON.parse(JSON.stringify(patternBoard))
+    defaultSides ? defaultSides = false : defaultSides
     player = 'Player1'
     gameEnded = false
     helpersDots = []
     possibleCastle = { left: null, right: null }
     possiblePlays = []
     currentObj = ''
+
+    let whiteName = document.getElementById('nameWhite')
+    let blackName = document.getElementById('nameBlack')
+    let saveName = whiteName.innerText
+    whiteName.innerText = blackName.innerText
+    blackName.innerText = saveName
 
     let caps = document.getElementsByClassName('capture-area')
     for (const cap of caps) {
