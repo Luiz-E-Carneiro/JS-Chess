@@ -159,3 +159,19 @@ const promotePawn = (cellObj) => {
         })
     }
 }
+
+const givePoint = () => {
+    if (player === 'Player1' && defaultSides) {
+        let score = Number(pointsP1.innerText) + 1
+        pointsP1.innerText = score.toFixed(1)
+    } else if (player === 'Player2' && defaultSides) {
+        let score = Number(pointsP2.innerText) + 1
+        pointsP2.innerText = score.toFixed(1)
+    } else if (player === 'Player1' && !defaultSides) {
+        let score = Number(pointsP2.innerText) + 1
+        pointsP2.innerText = score.toFixed(1)
+    } else if (player === 'Player2' && !defaultSides) {
+        let score = Number(pointsP1.innerText) + 1
+        pointsP1.innerText = score.toFixed(1)
+    }
+}

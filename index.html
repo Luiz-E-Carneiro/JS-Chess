@@ -19,9 +19,9 @@
         <div class="scoreboard--area">
             <h4>ScoreBoard</h4>
             <div>
-                <span id="nameP1">Player 1</span><span>-</span><span id="pointsP1">00</span>
+                <span id="nameP1">Player 1</span><span>-</span><span id="pointsP1">0.0</span>
                 <span> X </span>
-                <span id="pointsP2">00</span><span>-</span> <span id="nameP2"> Player 2</span>
+                <span id="pointsP2">0.0</span><span>-</span> <span id="nameP2"> Player 2</span>
             </div>
             <p>Draws:<span>00</span></p>
         </div>
@@ -100,13 +100,14 @@
                     00:00
                 </h3>
                 <div>
-                    <button class="action--btn give--up">
+                    <button class="action--btn give--up" id="blackGiveUp" disabled>
                         <span class="material-symbols-outlined">flag</span>
                         <span class="text">Give up</span>
-                        <button class="action--btn offer--draw">
-                            <span class="material-symbols-outlined">handshake</span>
-                            <span class="text">Offer Draw</span>
-                        </button>
+                    </button>
+                    <button class="action--btn offer--draw" id="blackDraw">
+                        <span class="material-symbols-outlined">handshake</span>
+                        <span class="text">Offer Draw</span>
+                    </button>
                 </div>
             </div>
             <div class="player--name">
@@ -140,11 +141,11 @@
                     00:00
                 </h3>
                 <div>
-                    <button class="action--btn offer--draw">
+                    <button class="action--btn offer--draw" id="whiteDraw">
                         <span class="material-symbols-outlined">handshake</span>
                         <span class="text">Offer Draw</span>
                     </button>
-                    <button class="action--btn give--up">
+                    <button class="action--btn give--up" id="whiteGiveUp">
                         <span class="material-symbols-outlined">flag</span>
                         <span class="text">Give up</span>
                     </button>

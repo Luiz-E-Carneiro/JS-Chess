@@ -46,8 +46,8 @@ blueColor.addEventListener('click', function () {
 // Reset Score
 const resetScoreBtn = document.getElementById('resetBtn')
 resetScoreBtn.addEventListener('click', function () {
-    pointsP1.innerText = '00'
-    pointsP2.innerText = '00'
+    pointsP1.innerText = '0.0'
+    pointsP2.innerText = '0.0'
 })
 
 // Timers
@@ -63,7 +63,6 @@ const timerShaking = () => {
             timerBlack.style.animation = `shaking 1s linear infinite`
             timerWhite.style.animation = 'none'
         }
-
     }
     else {
         timerBlack.style.animation = 'none'
@@ -109,7 +108,10 @@ function changeName(btn, color) {
 
     } else {
         let getInput = document.getElementsByClassName('inputName')[0]
-        if(getInput.value.length === 0) return
+        console.log(getInput.value);
+        console.log(nameBlack);
+        console.log(nameWhite);
+        if(getInput.value.length === 0 || getInput.value === nameWhite || getInput.value === nameBlack) return
         
         editBlackName.disabled = false
         editWhiteName.disabled = false
@@ -144,3 +146,48 @@ const changeNameBoard = () => {
         if(nameP2.innerText !== nameWhite) nameP2.innerText = nameWhite 
     }
 }
+
+// Give Up Fuction
+
+const whiteGiveUp = document.getElementById('whiteGiveUp')
+const blackGiveUp = document.getElementById('blackGiveUp')
+
+whiteGiveUp.addEventListener('click', ()=> giveUp('White'))
+blackGiveUp.addEventListener('click', ()=> giveUp('Black'))
+let declineSound = new Audio('./../assets/sounds/decline.mp3')
+
+function giveUp(color) {
+    declineSound.play()
+    gameEnded = true
+    color === 'White' ? result.innerText = 'Black Won' : result.innerText = 'White won'
+    whiteGiveUp.disabled = true
+    blackGiveUp.disabled = true
+    givePoint()
+}
+
+// Offer Draw
+
+const whiteDraw = document.getElementById('whiteDraw')
+const blackDraw = document.getElementById('blackDraw')
+
+function offerDraw(color) {
+    
+    if(color === 'white'){
+        blackDraw
+    }
+
+    function allow(params) {
+        
+    }
+
+    function allowAcceptDraw(btn) {
+        btn.innerHTML =  `<span class="material-symbols-outlined">done_outline</span>
+                          <span class="text">Accept Draw</span>`
+    }
+
+}
+
+/**
+ * <span class="material-symbols-outlined">handshake</span>
+                        <span class="text">Offer Draw</span>
+ */

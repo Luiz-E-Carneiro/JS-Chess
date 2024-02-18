@@ -164,10 +164,14 @@ const movePiece = (newSpot) => {
     let whiteMoveSound = new Audio('./../../assets/sounds/move-self.mp3')
     let blackMoveSound = new Audio('./../../assets/sounds/move-opponent.mp3')
     let checkSound = new Audio('./../../../assets/sounds/move-check.mp3')
-    
+
     if (captured) captureSound.play()
-    if(booleanCheck) checkSound.play()
+    if (booleanCheck) checkSound.play()
     else player === 'Player1' ? whiteMoveSound.play() : blackMoveSound.play()
+
+    // Give Up not disabled 
+    whiteGiveUp.disabled ? whiteGiveUp.disabled = false : whiteGiveUp.disabled = true 
+    blackGiveUp.disabled ? blackGiveUp.disabled = false : blackGiveUp.disabled = true
 }
 
 function gameRefrash() {

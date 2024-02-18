@@ -18,7 +18,6 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
             }
 
             if (objSpot.piece.name === 'king' && objSpot.piece.color !== color) {
-                alert('king in target')
                 objCheck.push({ attackPiece: pieceObj, cellsUntilKing: objSpot, objKing: objSpot })
                 booleanCheck = true
             }
