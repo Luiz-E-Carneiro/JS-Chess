@@ -10,6 +10,7 @@ const checkMate = (objKing) => {
     objKing.cell.classList.add('checkMate')
 
     objKing.piece.color === 'white' ? result.innerText = 'Black Won' : result.innerText =  'White won'
+    stopTimerShaking()
     givePoint()
 }
 

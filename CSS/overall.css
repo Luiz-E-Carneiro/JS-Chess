@@ -346,9 +346,32 @@ body {
     justify-content: end;
 }
 
+#whiteDrawArea, #blackDrawArea {
+    display: flex;
+    gap: .3em;
+}
+
 .offer--draw {
     background-color: #a9a9a9;
     padding-right: 15px;
+}
+
+.act--draw {
+    width: calc(3.5em/2);
+    height: calc(3.5em/2);
+    padding: 2px;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.act--draw:nth-of-type(2){
+    background-color: #12a34b;
+}
+.act--draw:nth-of-type(3){
+    background-color: #a9a9a9;
 }
 
 .give--up {
@@ -389,11 +412,16 @@ body {
     white-space: nowrap;
 }
 
-.timer-btns--area {
+.actions-btns--area {
     display: flex;
     align-items: center;
     height: 3.5em;
     gap: 1em;
+}
+
+.timer--area {
+    height: 100%;
+    position: relative;
 }
 
 .timer {
@@ -409,6 +437,21 @@ body {
 .timer span {
     font-size: 1.7rem;
     animation: none
+}
+
+.line--timer {
+    width: 100%;
+    background-color: #12a34b;
+    height: 5px;
+    position: absolute;
+}
+
+#blackline {
+    top: 0;
+}
+
+#whiteLine {
+    bottom: 0;
 }
 
 .whiteTimer {
@@ -459,7 +502,7 @@ body {
     color: #ededed
 }
 
-.inputName{
+.inputName {
     width: 6em;
     height: 100%;
     background-color: transparent;
@@ -467,7 +510,7 @@ body {
     outline: none;
     border-bottom: 2px solid white;
     color: white;
-    font-size: 1.2rem   ;
+    font-size: 1.2rem;
 }
 
 @keyframes rotate360 {
@@ -485,15 +528,15 @@ body {
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(45deg);
+        transform: rotate(45deg) translate(-5%, -5%);
     }
     50% {
-        transform: rotate(0deg);
+        transform: rotate(0deg) translate(5%, 5%);
     }
     75% {
-        transform: rotate(-45deg);
+        transform: rotate(-45deg) translate(-5%, -5%);
     }
     100% {
-        transform: rotate(0deg);
+        transform: rotate(0deg) translate(-5%, -5%);
     }
 }

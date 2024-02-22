@@ -70,6 +70,11 @@ const timerShaking = () => {
     }
 }
 
+const stopTimerShaking = () => {
+    timerBlack.style.animation = 'none'
+    timerWhite.style.animation = 'none'
+}
+
 // Change Names
 var nameWhite = 'Player 1'
 var nameBlack = 'Player 2'
@@ -80,11 +85,11 @@ const editBlackName = document.getElementById('editBlackName')
 var changingName = false
 
 
-editWhiteName.addEventListener('click', ()=> changeName(editWhiteName, 'white'))
-editBlackName.addEventListener('click', ()=> changeName(editBlackName, 'black'))
+editWhiteName.addEventListener('click', () => changeName(editWhiteName, 'white'))
+editBlackName.addEventListener('click', () => changeName(editBlackName, 'black'))
 
 function changeName(btn, color) {
-    if(!changingName){
+    if (!changingName) {
 
         btn.innerHTML = `<span class="material-symbols-outlined">done_outline</span>`
 
@@ -93,11 +98,11 @@ function changeName(btn, color) {
         inputName.classList.add('inputName')
         var name
 
-        if(color === 'white'){
+        if (color === 'white') {
             editBlackName.disabled = true
             name = document.getElementById('nameWhite')
-            
-        }else {
+
+        } else {
             editWhiteName.disabled = true
             name = document.getElementById('nameBlack')
         }
@@ -111,19 +116,19 @@ function changeName(btn, color) {
         console.log(getInput.value);
         console.log(nameBlack);
         console.log(nameWhite);
-        if(getInput.value.length === 0 || getInput.value === nameWhite || getInput.value === nameBlack) return
-        
+        if (getInput.value.length === 0 || getInput.value === nameWhite || getInput.value === nameBlack) return
+
         editBlackName.disabled = false
         editWhiteName.disabled = false
 
         let newName = getInput.value
-        let name 
+        let name
 
-        if(color ===  'white'){
-            btn.innerHTML = `<span class="material-symbols-outlined" id="editWhiteName">edit</span>` 
-            name = document.getElementById('nameWhite')    
+        if (color === 'white') {
+            btn.innerHTML = `<span class="material-symbols-outlined" id="editWhiteName">edit</span>`
+            name = document.getElementById('nameWhite')
             nameWhite = newName
-        }else {
+        } else {
             btn.innerHTML = `<span class="material-symbols-outlined" id="editBlackName">edit</span>`
             name = document.getElementById('nameBlack')
             nameBlack = newName
@@ -138,12 +143,12 @@ var nameP1 = document.getElementById('nameP1')
 var nameP2 = document.getElementById('nameP2')
 
 const changeNameBoard = () => {
-    if(defaultSides){
-        if(nameP1.innerText !== nameWhite) nameP1.innerText = nameWhite 
-        if(nameP2.innerText !== nameBlack) nameP2.innerText = nameBlack 
+    if (defaultSides) {
+        if (nameP1.innerText !== nameWhite) nameP1.innerText = nameWhite
+        if (nameP2.innerText !== nameBlack) nameP2.innerText = nameBlack
     } else {
-        if(nameP1.innerText !== nameBlack) nameP1.innerText = nameBlack 
-        if(nameP2.innerText !== nameWhite) nameP2.innerText = nameWhite 
+        if (nameP1.innerText !== nameBlack) nameP1.innerText = nameBlack
+        if (nameP2.innerText !== nameWhite) nameP2.innerText = nameWhite
     }
 }
 
@@ -152,8 +157,8 @@ const changeNameBoard = () => {
 const whiteGiveUp = document.getElementById('whiteGiveUp')
 const blackGiveUp = document.getElementById('blackGiveUp')
 
-whiteGiveUp.addEventListener('click', ()=> giveUp('White'))
-blackGiveUp.addEventListener('click', ()=> giveUp('Black'))
+whiteGiveUp.addEventListener('click', () => giveUp('White'))
+blackGiveUp.addEventListener('click', () => giveUp('Black'))
 let declineSound = new Audio('./../assets/sounds/decline.mp3')
 
 function giveUp(color) {
@@ -162,6 +167,7 @@ function giveUp(color) {
     color === 'White' ? result.innerText = 'Black Won' : result.innerText = 'White won'
     whiteGiveUp.disabled = true
     blackGiveUp.disabled = true
+    stopTimerShaking()
     givePoint()
 }
 
@@ -170,24 +176,51 @@ function giveUp(color) {
 const whiteDraw = document.getElementById('whiteDraw')
 const blackDraw = document.getElementById('blackDraw')
 
+const whiteDrawArea = document.getElementById('whiteDrawArea')
+const blackDrawArea = document.getElementById('blackDrawArea')
+
+whiteDraw.addEventListener('click', () => offerDraw('white'))
+blackDraw.addEventListener('click', () => offerDraw('black'))
+
 function offerDraw(color) {
-    
-    if(color === 'white'){
-        blackDraw
-    }
+    let acceptDraw = document.createElement('button')
+    acceptDraw.innerHTML = `<span class="material-symbols-outlined">done_outline</span>`
+    acceptDraw.classList.add('act--draw')
+    let denyDraw = document.createElement('button')
+    denyDraw.innerHTML = `<span class="material-symbols-outlined">close</span>`
+    denyDraw.classList.add('act--draw')
 
-    function allow(params) {
-        
-    }
+    acceptDraw.addEventListener('click', () => draw(acceptDraw, denyDraw))
+    denyDraw.addEventListener('click', () => resetDraw(acceptDraw, denyDraw))
 
-    function allowAcceptDraw(btn) {
-        btn.innerHTML =  `<span class="material-symbols-outlined">done_outline</span>
-                          <span class="text">Accept Draw</span>`
+    if (color === 'white') {
+        blackDraw.style.display = 'none'
+        blackDrawArea.appendChild(acceptDraw)
+        blackDrawArea.appendChild(denyDraw)
+    } else {
+        whiteDraw.style.display = 'none'
+        whiteDrawArea.appendChild(acceptDraw)
+        whiteDrawArea.appendChild(denyDraw)
     }
 
 }
 
-/**
- * <span class="material-symbols-outlined">handshake</span>
-                        <span class="text">Offer Draw</span>
- */
+const resetDraw = (btn1, btn2) => {
+    blackDraw.style.display = 'flex'
+    whiteDraw.style.display = 'flex'
+    btn1.parentNode.removeChild(btn1)
+    btn2.parentNode.removeChild(btn2)
+}
+
+const draw = (btn1, btn2) => {
+    btn1.parentNode.removeChild(btn1)
+    btn2.parentNode.removeChild(btn2)
+    blackDraw.style.display = 'flex'
+    whiteDraw.style.display = 'flex'
+    pointsP1.innerText = Number(pointsP1.innerText) + 0.5
+    pointsP2.innerText = Number(pointsP2.innerText) + 0.5
+    gameEnded = true
+    stopTimerShaking()
+    let drawSound = new Audio('./../assets/sounds/game-draw.mp3')
+    drawSound.play()
+}
