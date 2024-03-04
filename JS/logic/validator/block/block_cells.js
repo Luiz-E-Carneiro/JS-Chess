@@ -49,13 +49,13 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
 
 const resetBlockedCells = () => {
 
-
     reset(cellsBlocked.black, 'black')
     reset(cellsBlocked.white, 'white')
 
     function reset(arrayCellsObj, color) {
         arrayCellsObj.forEach(cellObj => {
             color === 'white' ? delete cellObj.whiteKingCannotStay : delete cellObj.blackKingCannotStay  
+            delete cellObj.cannotMove
         })
     }
 

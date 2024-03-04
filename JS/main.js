@@ -1,10 +1,13 @@
 var defaultSides = true // Plyer1 = white & Player2 = black
-var player = 'Player1'
+var player = 'white'
 var gameEnded = false
+var gameStarted = false
 var helpersDots = []
 var possibleCastle = { left: null, right: null }
 var possiblePlays = []
 var currentObj = ''
+var time = 0
+var increment = 0
 
 const allowPlay = () => {
     boardObj.forEach(line => {
@@ -14,12 +17,12 @@ const allowPlay = () => {
                 if (gameEnded) return
                 if (obj.castle) {
                     castle(obj)
-                    player === 'Player1' ? player = 'Player2' : player = 'Player1'
+                    player === 'white' ? player = 'black' : player = 'white'
                     timerShaking()
                 } else if (obj.possibleMove) {
                     movePiece(obj)
                     refrash()
-                    player === 'Player1' ? player = 'Player2' : player = 'Player1'
+                    player === 'white' ? player = 'black' : player = 'white'
                     timerShaking()
                 } else {
                     if (currentObj === obj) {

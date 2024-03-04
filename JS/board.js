@@ -53,7 +53,7 @@ const patternBoard = [
         { piece: false },
         { piece: false },
         { piece: false },
-        { piece: false },     
+        { piece: false },
         { piece: false },
         { piece: false },
         { piece: false }
@@ -103,6 +103,8 @@ const boardArea = document.getElementById('board')
 
 const realoadBoard = () => {
     boardArea.innerHTML = ''
+    var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    var numbers = [1, 2, 3, 4, 5, 6, 7, 8]
     var allCells = [];
     for (let i = 0; i < boardObj.length; i++) {
         let color = i % 2 !== 0 ? 'black' : 'white';
@@ -116,6 +118,8 @@ const realoadBoard = () => {
             boardObj[i][j].cell = cell;
             boardObj[i][j].column = j;
             boardObj[i][j].line = i;
+            boardObj[i][j].id = letters[j] + numbers[i];
+            
 
             allCells.push(cell);
             boardArea.appendChild(cell);

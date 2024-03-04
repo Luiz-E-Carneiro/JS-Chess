@@ -1,3 +1,9 @@
+//Sounds
+let captureSound = new Audio('./../../assets/sounds/capture.mp3')
+let whiteMoveSound = new Audio('./../../assets/sounds/move-self.mp3')
+let blackMoveSound = new Audio('./../../assets/sounds/move-opponent.mp3')
+let checkSound = new Audio('./../../assets/sounds/move-check.mp3')
+
 const getVerticalHorizontal = (line, column, color, directions, moves, captures) => {
     for (let i = 0; i < directions.length; i++) {
         let j = 1;
@@ -134,7 +140,6 @@ const movePiece = (newSpot) => {
             }
         }
     }
-
     deletePiece(newSpot.cell.children, true)
     deletePiece(currentObj.cell.children)
     const { column, line } = { ...currentObj }
@@ -158,27 +163,41 @@ const movePiece = (newSpot) => {
 
     gameRefrash()
 
-    //Sound
-    let captureSound = new Audio('./../../assets/sounds/capture.mp3')
-    captureSound.play
-    let whiteMoveSound = new Audio('./../../assets/sounds/move-self.mp3')
-    let blackMoveSound = new Audio('./../../assets/sounds/move-opponent.mp3')
-    let checkSound = new Audio('./../../../assets/sounds/move-check.mp3')
-
-    if (captured) captureSound.play()
     if (booleanCheck) checkSound.play()
-    else player === 'Player1' ? whiteMoveSound.play() : blackMoveSound.play()
+    else if (captured) captureSound.play()
+    else player === 'white' ? whiteMoveSound.play() : blackMoveSound.play()
 
-    // Give Up not disabled 
-    whiteGiveUp.disabled ? whiteGiveUp.disabled = false : whiteGiveUp.disabled = true 
-    blackGiveUp.disabled ? blackGiveUp.disabled = false : blackGiveUp.disabled = true
+    // Game Started
+    if (!gameStarted) {
+        startGame()
+    } else {
+        // Give Up disabled 
+        whiteGiveUp.disabled ? whiteGiveUp.disabled = false : whiteGiveUp.disabled = true
+        blackGiveUp.disabled ? blackGiveUp.disabled = false : blackGiveUp.disabled = true
+    }
+    incrementation()
+}
+
+function startGame() {
+    gameStarted = true
+    for (let btn of mins) {
+        btn.disabled = true
+    }
+    for (let btn of increments) {
+        btn.disabled = true
+    }
+    whiteDraw.disabled = false
+    blackDraw.disabled = false
+    timer(true)
+
+    blackGiveUp.disabled = false
 }
 
 function gameRefrash() {
     refrash()
+    resetLimits()
     resetCheck()
     resetBlockedCells()
-    resetLimits()
 
     validateCheck()
     verificCheck()

@@ -21,8 +21,8 @@ body {
 }
 
 
-.promote--area--black,
-.promote--area--white {
+.promote-area-black,
+.promote-area-white {
     height: 3.5em;
     width: 20em;
     background-color: rgb(87, 80, 77);
@@ -35,11 +35,11 @@ body {
     transform: translate(-50%, 0);
 }
 
-.promote--area--white {
+.promote-area-white {
     top: 10px;
 }
 
-.promote--area--black {
+.promote-area-black {
     bottom: 10px;
 }
 
@@ -68,8 +68,8 @@ body {
     width: 65%;
 }
 
-.left--side,
-.right--side {
+.left-side,
+.right-side {
     height: 28em;
     flex: 1;
     display: flex;
@@ -77,7 +77,7 @@ body {
     justify-content: space-between;
 }
 
-.left--side {
+.left-side {
     align-items: center;
 }
 
@@ -89,31 +89,31 @@ body {
     gap: 1.5em;
 }
 
-.scoreboard--area * {
+.scoreboard-area * {
     color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.scoreboard--area {
+.scoreboard-area {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.scoreboard--area h4,
-.scoreboard--area p {
+.scoreboard-area h4,
+.scoreboard-area p {
     font-size: 1.4rem;
 }
 
-.scoreboard--area>div {
+.scoreboard-area>div {
     display: flex;
     gap: .8em;
     font-size: 1.3rem;
 }
 
-.board--styles {
+.board-styles {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,11 +121,11 @@ body {
     color: white;
 }
 
-.board--styles h4 {
+.board-styles h4 {
     font-size: 1.4rem;
 }
 
-.board--styles>div {
+.board-styles>div {
     display: flex;
     gap: 6em;
 }
@@ -146,7 +146,7 @@ body {
     border-radius: 15px;
 }
 
-.default--board,
+.default-board,
 ._3Dboard {
     display: flex;
     flex-wrap: wrap;
@@ -154,16 +154,16 @@ body {
     height: 40px;
 }
 
-.default--board>div,
+.default-board>div,
 ._3Dboard>div {
     width: 50%;
     height: 50%;
     background-color: var(--black_cell)
 }
 
-.default--board>div:nth-child(1),
+.default-board>div:nth-child(1),
 ._3Dboard>div:nth-child(1),
-.default--board>div:nth-child(4),
+.default-board>div:nth-child(4),
 ._3Dboard>div:nth-child(4) {
     background-color: var(--white_cell);
 }
@@ -198,15 +198,15 @@ body {
 
 }
 
-.color--area {
+.color-area {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: .5em;
 }
 
-.default--color,
-.blue--board {
+.default-color,
+.blue-board {
     display: flex;
     width: 50px;
     height: 50px;
@@ -217,14 +217,14 @@ body {
     overflow: hidden;
 }
 
-.default--color:hover,
-.blue--board:hover {
+.default-color:hover,
+.blue-board:hover {
     background-color: rgb(255, 255, 255, .4);
     border-radius: 15px;
 }
 
-.default--color>div>div,
-.blue--board>div>div {
+.default-color>div>div,
+.blue-board>div>div {
     width: 20px;
     height: 20px;
 }
@@ -245,7 +245,7 @@ body {
     background-color: #0c193b;
 }
 
-.middle--area {
+.middle-area {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -253,7 +253,59 @@ body {
     gap: 1em;
 }
 
-.result--area {
+.info-board {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5em;
+    height: 140px;
+}
+
+.line-between{
+    background-color: rgba(128, 128, 128, .5);
+    width: 10px;
+    height: 100%;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    background-color: #885e3f;
+    border-collapse: collapse;
+    background-color: var(--white_cell);
+    color: white;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+table * {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+table thead th {
+    padding: 2px;
+    background-color: var(--black_cell);
+    box-shadow: 0 1px 3px var(--black_cell);
+}
+
+
+table button {
+    background-color: rgb(233, 233, 233);
+    border: none;
+    transition: .1s ease-in-out;
+    padding: 4px;
+    border-radius: 5px;
+    width: 70%;
+}
+
+table button:hover {
+    background-color: white;
+    border: none;
+}
+
+.result-area {
     width: 100%;
     height: 3.5em;
     display: flex;
@@ -267,10 +319,11 @@ body {
 }
 
 
-
-.play--again--btn,
-.reset--btn {
+.play-again-btn,
+.reset-btn {
     padding: 10px;
+    height: 60px;
+    width: 200px;
     color: #f5f5f5;
     font-weight: 600;
     text-transform: capitalize;
@@ -284,20 +337,20 @@ body {
     transition: all .3s;
 }
 
-.reset--btn {
+.reset-btn {
     border: 2px solid var(--black_cell);
     background-color: var(--white_cell);
     box-shadow: -5px 5px 0 var(--black_cell);
 }
 
-.reset--btn:hover {
+.reset-btn:hover {
     border-color: var(--white_cell);
     background-color: var(--black_cell);
-    color: var(--white_cell);
+    color: var(-white_cell);
     box-shadow: -5px 5px 0 var(--white_cell);
 }
 
-.reset--btn:active {
+.reset-btn:active {
     border-color: var(--black_cell);
     background-color: var(--white_cell);
     color: #f5f5f5;
@@ -305,20 +358,20 @@ body {
     box-shadow: none;
 }
 
-.play--again--btn {
+.play-again-btn {
     border: 2px solid #147355;
     background-color: #12a34b;
     box-shadow: -5px 5px 0 #147355;
 }
 
-.play--again--btn:hover {
+.play-again-btn:hover {
     border-color: #12a34b;
     background-color: #147355;
     color: #12a34b;
     box-shadow: -5px 5px 0 #12a34b;
 }
 
-.play--again--btn:active {
+.play-again-btn:active {
     border-color: #147355;
     background-color: #12a34b;
     color: #f5f5f5;
@@ -326,12 +379,12 @@ body {
     box-shadow: none;
 }
 
-.play--again--btn:hover .material-symbols-outlined {
+.play-again-btn:hover .material-symbols-outlined {
     animation: rotate360 1s ease-in-out infinite;
 
 }
 
-.action--btn {
+.action-btn {
     align-items: center;
     border-radius: 4px;
     cursor: pointer;
@@ -346,17 +399,18 @@ body {
     justify-content: end;
 }
 
-#whiteDrawArea, #blackDrawArea {
+#whiteDrawArea,
+#blackDrawArea {
     display: flex;
     gap: .3em;
 }
 
-.offer--draw {
+.offer-draw {
     background-color: #a9a9a9;
     padding-right: 15px;
 }
 
-.act--draw {
+.act-draw{
     width: calc(3.5em/2);
     height: calc(3.5em/2);
     padding: 2px;
@@ -367,27 +421,28 @@ body {
     align-items: center;
 }
 
-.act--draw:nth-of-type(2){
+.act-draw:nth-of-type(2) {
     background-color: #12a34b;
 }
-.act--draw:nth-of-type(3){
+
+.act-draw:nth-of-type(3) {
     background-color: #a9a9a9;
 }
 
-.give--up {
+.give-up {
     background-color: #d1120b;
     padding-right: 25px;
 }
 
-.action--btn:hover {
+.action-btn:hover {
     width: 120px;
 }
 
-.action--btn:hover .text {
+.action-btn:hover .text {
     display: inline-block;
 }
 
-.action--btn .material-symbols-outlined {
+.action-btn .material-symbols-outlined {
     font-size: 24px;
     position: absolute;
     left: 12px;
@@ -396,30 +451,30 @@ body {
     overflow: hidden;
 }
 
-.give--up .material-symbols-outlined {
+.give-up .material-symbols-outlined {
     background: rgb(209, 18, 11);
     background: linear-gradient(90deg, rgba(209, 18, 11, 1) 80%, rgba(0, 212, 255, 0) 100%);
 }
 
-.offer--draw .material-symbols-outlined {
+.offer-draw .material-symbols-outlined {
     background: rgb(169, 169, 169);
     background: linear-gradient(90deg, rgba(169, 169, 169, 1) 80%, rgba(169, 169, 169, 1) 100%);
 }
 
-.action--btn .text {
+.action-btn .text {
     display: none;
     vertical-align: middle;
     white-space: nowrap;
 }
 
-.actions-btns--area {
+.actions-btns-area {
     display: flex;
     align-items: center;
     height: 3.5em;
     gap: 1em;
 }
 
-.timer--area {
+.timer-area {
     height: 100%;
     position: relative;
 }
@@ -439,7 +494,7 @@ body {
     animation: none
 }
 
-.line--timer {
+.line-timer {
     width: 100%;
     background-color: #12a34b;
     height: 5px;
@@ -466,14 +521,14 @@ body {
     border-radius: 0 0 10px 10px;
 }
 
-.player--name {
+.player-name {
     margin: 10px 0;
     display: flex;
     font-size: 1.3rem;
     gap: .5em;
 }
 
-.player--name button {
+.player-name button {
     font-size: 1.5rem;
     background-color: rgba(245, 245, 245, 0.7);
     border-radius: 5px;
@@ -484,13 +539,13 @@ body {
     transition: .3s ease-in-out;
 }
 
-.player--name button {
+.player-name button {
     border: 2px solid rgba(245, 245, 245, 0.7);
     background-color: #ededed;
     box-shadow: -2px 2px 0 rgba(245, 245, 245, 0.7);
 }
 
-.player--name button:active {
+.player-name button:active {
     border-color: rgba(245, 245, 245, 0.7);
     background-color: rgba(245, 245, 245, 0.7);
     color: #ededed;
@@ -498,7 +553,7 @@ body {
     box-shadow: none;
 }
 
-.player--name h3 {
+.player-name h3 {
     color: #ededed
 }
 
@@ -528,15 +583,15 @@ body {
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(45deg) translate(-5%, -5%);
+        transform: rotate(45deg);
     }
     50% {
-        transform: rotate(0deg) translate(5%, 5%);
+        transform: rotate(0deg)
     }
     75% {
-        transform: rotate(-45deg) translate(-5%, -5%);
+        transform: rotate(-45deg);
     }
     100% {
-        transform: rotate(0deg) translate(-5%, -5%);
+        transform: rotate(0deg);
     }
 }

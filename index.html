@@ -15,8 +15,8 @@
 
 <body>
 
-    <div class="left--side">
-        <div class="scoreboard--area">
+    <div class="left-side">
+        <div class="scoreboard-area">
             <h4>ScoreBoard</h4>
             <div>
                 <span id="nameP1">Player 1</span><span>-</span><span id="pointsP1">0.0</span>
@@ -25,16 +25,16 @@
             </div>
             <p>Draws:<span>00</span></p>
         </div>
-        <button class="reset--btn" id="resetBtn">Reset Scores</button>
+        <button class="reset-btn" id="resetBtn">Reset Scores</button>
 
-        <div class="board--styles">
+        <div class="board-styles">
             <h4>Change Board Style</h4>
             <div>
                 <div>
                     <h4>Format:</h4>
                     <div class="style" id="defaultStyle">
                         <span>Default:</span>
-                        <div class="default--board">
+                        <div class="default-board">
                             <div></div>
                             <div></div>
                             <div></div>
@@ -51,9 +51,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="color--area">
+                <div class="color-area">
                     <h4>Color:</h4>
-                    <div class="default--color" id="defaultColor">
+                    <div class="default-color" id="defaultColor">
                         <div>
                             <div class="whiteSpot"></div>
                             <div class="blackSpot"></div>
@@ -63,7 +63,7 @@
                             <div class="whiteSpot"></div>
                         </div>
                     </div>
-                    <div class="blue--board" id="blueColor">
+                    <div class="blue-board" id="blueColor">
                         <div>
                             <div class="lBlueSpot"></div>
                             <div class="dBlueSpot"></div>
@@ -78,10 +78,10 @@
             </div>
         </div>
     </div>
-    <div class="promote--area--white" id="promoteWhiteArea">
+    <div class="promote-area-white" id="promoteWhiteArea">
 
     </div>
-    <div class="x--Axie" id="xAxie">
+    <div class="x-Axie" id="xAxie">
 
         <div class="capture-area"></div>
 
@@ -90,32 +90,32 @@
         <div class="capture-area"></div>
 
     </div>
-    <div class="promote--area--black" id="promoteBlackArea">
+    <div class="promote-area-black" id="promoteBlackArea">
     </div>
-    <div class="right--side">
-        <div class="players--area">
-            <div class="actions-btns--area">
-                <div class="timer--area">
-                    <div class="line--timer" id="blackLine"></div>
+    <div class="right-side">
+        <div class="players-area">
+            <div class="actions-btns-area">
+                <div class="timer-area">
+                    <div class="line-timer" id="blackLine"></div>
                     <h3 class="timer blackTimer">
-                        <span class="material-symbols-outlined" id="timerBlack">alarm</span>
-                        00:00
+                        <span class="material-symbols-outlined" id="iconTimerBlack">alarm</span>
+                        <span id="blackMinutes">00</span>:<span id="blackSeconds">00</span>
                     </h3>
                 </div>
                 <div>
-                    <button class="action--btn give--up" id="blackGiveUp" disabled>
+                    <button class="action-btn give-up" id="blackGiveUp" disabled>
                         <span class="material-symbols-outlined">flag</span>
                         <span class="text">Give up</span>
                     </button>
                     <div id="blackDrawArea">
-                        <button class="action--btn offer--draw" id="blackDraw">
+                        <button class="action-btn offer-draw" id="blackDraw" disabled>
                             <span class="material-symbols-outlined">handshake</span>
                             <span class="text">Offer Draw</span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="player--name">
+            <div class="player-name">
                 <button id="editBlackName">
                     <span class="material-symbols-outlined">edit</span>
                 </button>
@@ -123,39 +123,85 @@
             </div>
         </div>
 
-        <div class="middle--area">
-            <div class="result--area">
+        <div class="middle-area">
+            <div class="result-area">
                 <h2 class="result" id="result"></h2>
             </div>
-            <button class="play--again--btn" id="playAgainBtn">
-                Play again
-                <span class="material-symbols-outlined">restart_alt</span>
-            </button>
+
+            <div class="info-board">
+                <button class="play-again-btn" id="playAgainBtn">
+                    Play again
+                    <span class="material-symbols-outlined">restart_alt</span>
+                </button>
+                <div class="line-between"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Increment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <button class="min" value="0" disabled>Unlimited</button>
+                            </td>
+                            <td>
+                                <button class="increments" disabled>None</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="min" value="5">5 min</button>
+                            </td>
+                            <td>
+                                <button class="increments" value="5" disabled>5 seg</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="min" value="10">10 min</button>
+                            </td>
+                            <td>
+                                <button class="increments" value="10" disabled>10 seg</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="min" value="15">15 min</button>
+                            </td>
+                            <td>
+                                <button class="increments" value="15" disabled>15 seg</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="players--area">
-            <div class="player--name">
+        <div class="players-area">
+            <div class="player-name">
                 <button id="editWhiteName">
                     <span class="material-symbols-outlined">edit</span>
                 </button>
                 <h3 id="nameWhite">Player 1</h3>
             </div>
-            <div class="actions-btns--area">
-                <div class="timer--area">
+            <div class="actions-btns-area">
+                <div class="timer-area">
                     <h3 class="timer whiteTimer">
-                        <span class="material-symbols-outlined" id="timerWhite">alarm</span>
-                        00:00
+                        <span class="material-symbols-outlined" id="iconTimerWhite">alarm</span>
+                        <span id="whiteMinutes">00</span>:<span id="whiteSeconds">00</span>
                     </h3>
-                    <div class="line--timer" id="whiteLine"></div>
+                    <div class="line-timer" id="whiteLine"></div>
                 </div>
                 <div>
                     <div id="whiteDrawArea">
-                        <button class="action--btn offer--draw" id="whiteDraw">
+                        <button class="action-btn offer-draw" id="whiteDraw" disabled>
                             <span class="material-symbols-outlined">handshake</span>
                             <span class="text">Offer Draw</span>
                         </button>
                     </div>
-                    <button class="action--btn give--up" id="whiteGiveUp">
+                    <button class="action-btn give-up" id="whiteGiveUp" disabled>
                         <span class="material-symbols-outlined">flag</span>
                         <span class="text">Give up</span>
                     </button>
@@ -165,6 +211,7 @@
     </div>
     <script src="JS/main.js"></script>
     <script src="JS/board.js"></script>
+    <script src="JS/resetGame.js"></script>
     <script src="JS/logic/moviment.js"></script>
     <script src="JS/logic/path.js"></script>
     <script src="JS/logic/interactive.js"></script>
