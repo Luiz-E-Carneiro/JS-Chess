@@ -181,6 +181,7 @@ const finishGame = () => {
     whiteDraw.disabled = true
     blackDraw.disabled = true
     stopTimerShaking()
+    player === 'white' ? player = 'black' : player = 'white'
     givePoint()
 }
 
@@ -326,16 +327,23 @@ const draw = (btn1, btn2) => {
     result.innerText = 'Draw'
 }
 
-// Set Timer
+// SET TIMER
 var whiteMinutes = document.getElementById('whiteMinutes')
 var whiteSeconds = document.getElementById('whiteSeconds')
 var blackMinutes = document.getElementById('blackMinutes')
 var blackSeconds = document.getElementById('blackSeconds')
 
+var whiteLine = document.getElementById('whiteLine')
+var blackLine = document.getElementById('blackLine')
+
 var mins = document.getElementsByClassName('min')
 var increments = document.getElementsByClassName('increments')
 
+var whiteWidthLine
+var blackWidthLine
+
 var timing
+var decreasingLine
 
 for (let min of mins) {
     min.addEventListener('click', function () {
@@ -378,6 +386,7 @@ const setTimers = (minutes) => {
 const timer = (start, stop = false) => {
     if (whiteMinutes.innerText === "00") return
     player === "white" ? decreaseTime(whiteMinutes, whiteSeconds) : decreaseTime(blackMinutes, blackSeconds)
+    player === "white" ? decreaseLine(whiteMinutes, whiteSeconds, whiteLine, whiteWidthLine) : decreaseLine(blackMinutes, blackSeconds, blackLine, blackWidthLine)
     if (start) {
         timing = setInterval(() => {
             if (whiteMinutes.innerText === "00" && whiteSeconds.innerText === "00" || blackMinutes.innerText === "00" && blackSeconds.innerText === "00") {
@@ -385,6 +394,7 @@ const timer = (start, stop = false) => {
                 clearInterval(timing)
             } else {
                 player === 'white' ? decreaseTime(whiteMinutes, whiteSeconds) : decreaseTime(blackMinutes, blackSeconds)
+                player === "white" ? decreaseLine(whiteMinutes, whiteSeconds, whiteLine, whiteWidthLine) : decreaseLine(blackMinutes, blackSeconds, blackLine, blackWidthLine)
             }
         }, 1000)
     } else if (stop) {
@@ -451,4 +461,38 @@ const timerShaking = () => {
 const stopTimerShaking = () => {
     timerBlack.style.animation = 'none'
     timerWhite.style.animation = 'none'
+}
+
+// Lines 
+
+function decreaseTime(minutesElement, secondsElement) {
+    let secs = parseInt(secondsElement.innerText)
+    let mins = parseInt(minutesElement.innerText)
+    
+    secs--
+    if (secs === -1) {
+        secs = 59
+        if (mins !== 0) mins--
+    }
+    minutesElement.innerText = (mins < 10 ? "0" + mins : mins)
+    secondsElement.innerText = (secs < 10 ? "0" + secs : secs)
+}
+
+// Decrease Line
+const decreaseLine = (minutesElement, secondsElement, lineElement, line ) => {
+    let secs = parseInt(secondsElement.innerText)
+    let mins = parseInt(minutesElement.innerText)
+
+    let currentWidth = mins * 60 + secs
+    let newPercent = ruleOfThree(currentWidth, line)
+    if(newPercent <= 35 && newPercent > 15){
+        lineElement.style.backgroundColor = "#f96209"
+    } else if (newPercent <= 15){
+        lineElement.style.backgroundColor = "#d1120b"
+    }
+    lineElement.style.width = `${newPercent}%`
+}
+
+function ruleOfThree(width, line) {
+    return (width * 100) / line    
 }

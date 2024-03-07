@@ -1,4 +1,5 @@
 var defendPieces = []
+var attackingPieces = []
 
 const verificDefendingPiece = (arrayCells, piece, direction) => {
     let color = piece.color
@@ -9,6 +10,7 @@ const verificDefendingPiece = (arrayCells, piece, direction) => {
     if (amountPieces.length == 2) {
         amountPieces[0].piece.name === 'king' ? defendingPiece = amountPieces[1] : defendingPiece = amountPieces[0]
         limitDefenderPiece(defendingPiece, direction)
+        attackingPieces.push(piece)
     }
 }
 
@@ -35,13 +37,17 @@ const limitDefenderPiece = (defendingPiece, direc) => {
     }
     //Diagonal
     else if (direc === 'topLeft' || direc === 'bottomRight') {
-        if (name === 'queen' || name === 'bishop') {
+        if(name === 'pawn'){
+            boardObj[line][column].onlyCapture = true
+        }else if (name === 'queen' || name === 'bishop') {
             boardObj[line][column].onlyTLBR = true
         } else {
             boardObj[line][column].cannotMove = true
         }
     } else if (direc === 'topRight' || direc === 'bottomLeft') {
-        if (name === 'queen' || name === 'bishop') {
+        if(name === 'pawn'){
+            boardObj[line][column].onlyCapture = true
+        } else if (name === 'queen' || name === 'bishop') {
             boardObj[line][column].onlyTRBL = true
         } else {
             boardObj[line][column].cannotMove = true
@@ -59,6 +65,8 @@ const resetLimits = ( ) => {
         if(cellObj.onlyTLBR) delete boardObj[line][column].onlyTLBR
         if(cellObj.onlyTRBL) delete boardObj[line][column].onlyTRBL
         if(cellObj.cannotMove) delete boardObj[line][column].cannotMove
+        if(cellObj.onlyCapture) delete boardObj[line][column].onlyCapture
     });
     defendPieces = []
+    attackingPieces = []
 }

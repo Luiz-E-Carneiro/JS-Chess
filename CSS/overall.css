@@ -452,7 +452,7 @@ table button:hover {
 }
 
 .give-up .material-symbols-outlined {
-    background: rgb(209, 18, 11);
+    background: #d1120b;
     background: linear-gradient(90deg, rgba(209, 18, 11, 1) 80%, rgba(0, 212, 255, 0) 100%);
 }
 
@@ -495,6 +495,7 @@ table button:hover {
 }
 
 .line-timer {
+    max-width: 100%;
     width: 100%;
     background-color: #12a34b;
     height: 5px;

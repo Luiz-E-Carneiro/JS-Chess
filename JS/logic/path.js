@@ -25,21 +25,36 @@ const pawnPath = (divObj, helpKing = false) => {
         getRight = column === 7 ? false : getRight;
     }
     const checkAndPushCapture = (targetColumn) => {
-        var diagonalCell = boardObj[line - (1 * x)][targetColumn];
-        if (diagonalCell.piece && diagonalCell.piece.color != color) {
-            captures.push(diagonalCell);
+        var diagonalCell = boardObj[line - (1 * x)][targetColumn]
+
+        if (divObj.onlyCapture) {
+            attackingPieces.forEach(piece => {
+                if (diagonalCell.piece && diagonalCell.piece.color != color & diagonalCell.piece.name === piece.name) {
+                    captures.push(diagonalCell);
+                }
+            });
+        } else {
+            if (diagonalCell.piece && diagonalCell.piece.color != color) {
+                captures.push(diagonalCell);
+            }
         }
-    };
+    }
     if (!getLeft) {
-        checkAndPushCapture(column + 1);
+        checkAndPushCapture(column + 1)
     } else if (!getRight) {
-        checkAndPushCapture(column - 1);
+        checkAndPushCapture(column - 1)
     } else {
-        checkAndPushCapture(column - 1);
-        checkAndPushCapture(column + 1);
+        checkAndPushCapture(column - 1)
+        checkAndPushCapture(column + 1)
     }
 
-    if (!helpKing) paintPath(moves, captures)
+    if (!helpKing) {
+        if (divObj.onlyCapture) {
+            paintPath([], captures)
+        } else {
+            paintPath(moves, captures)
+        }
+    }
     else {
         verificHelp(moves, captures, divObj)
     }
@@ -257,4 +272,119 @@ const castle = (cellObj) => {
 
         refrash()
     }
+}
+
+
+const getVerticalHorizontal = (line, column, color, directions, moves, captures) => {
+    for (let i = 0; i < directions.length; i++) {
+        let j = 1;
+        let stopCondition = false;
+
+        while (!stopCondition) {
+            let cell = '';
+            switch (directions[i]) {
+                case 'left':
+                    if (column - j >= 0) {
+                        cell = boardObj[line][column - j];
+                        stopCondition = column - j === 0;
+                    } else stopCondition = true
+                    break;
+
+                case 'right':
+                    if (column + j <= 7) {
+                        cell = boardObj[line][column + j];
+                        stopCondition = column + j === 7;
+                    } else stopCondition = true
+                    break;
+
+                case 'up':
+                    if (line - j >= 0) {
+                        cell = boardObj[line - j][column];
+                        stopCondition = line - j === 0;
+                    } else stopCondition = true
+                    break;
+
+                case 'down':
+                    if (line + j <= 7) {
+                        cell = boardObj[line + j][column];
+                        stopCondition = line + j === 7;
+                    } else stopCondition = true
+                    break;
+
+                default:
+                    alert('Something went wrong, try agin please. . .')
+                    return;
+            }
+            if (cell === '') continue
+            if (!cell.piece) {
+                moves.push(cell);
+            } else {
+                if (cell.piece.color !== color) {
+                    captures.push(cell);
+                }
+                stopCondition = true;
+            }
+            j++;
+        }
+    }
+    return [moves, captures]
+}
+
+const getDiagonals = (line, column, color, directions, moves, captures) => {
+    var moves = moves
+    var captures = captures
+    for (let direc of directions) {
+        let j = 1;
+        let stopCondition = false;
+
+        while (!stopCondition) {
+            let cell = '';
+            switch (direc) {
+                case 'topLeft':
+                    if (line - j >= 0 && column - j >= 0) {
+                        cell = boardObj[line - j][column - j];
+                        stopCondition = column + j === 0 || line + j === 0;
+                    } else stopCondition = true
+                    break;
+
+                case 'bottomRight':
+                    if (line + j <= 7 && column + j <= 7) {
+                        cell = boardObj[line + j][column + j];
+                        stopCondition = column + j === 7 || line + j === 7;
+                    } else stopCondition = true
+                    break;
+
+                case 'topRight':
+                    if (line - j >= 0 && column + j <= 7) {
+                        cell = boardObj[line - j][column + j];
+                        stopCondition = line - j === 0
+                        stopCondition = column + j === 7;
+                    } else stopCondition = true
+                    break;
+
+                case 'bottomLeft':
+                    if (line + j <= 7 && column - j >= 0) {
+                        cell = boardObj[line + j][column - j];
+                        stopCondition = line + j === 7
+                        stopCondition = column - j === 0;
+                    } else stopCondition = true
+                    break;
+
+                default:
+                    alert('something went wrong, try agin please. . .')
+                    return;
+            }
+            if (cell === '') continue
+            if (!cell.piece) {
+                moves.push(cell);
+            } else {
+                if (cell.piece.color !== color) {
+                    captures.push(cell);
+                }
+                stopCondition = true;
+            }
+            j++;
+        }
+    }
+    return ([moves, captures])
 }

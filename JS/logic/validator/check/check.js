@@ -21,6 +21,7 @@ const verificCheck = () => {
         EmptySpacesToKing(objKing, true)
     } else {
         helpKing(color)
+        checkSound.play()
         if (!kingPath(objKing, false, true) && helpKingObjs.length === 0){
             checkMate(objKing)
         } else if(helpKingObjs.length === 0){

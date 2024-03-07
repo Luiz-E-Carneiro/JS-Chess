@@ -12,7 +12,7 @@
 }
 
 .board {
-    background-color: grey;
+    background-color: transparent;
     width: 28em;
     height: 28em;
     display: flex;

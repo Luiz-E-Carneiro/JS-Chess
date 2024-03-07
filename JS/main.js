@@ -8,6 +8,7 @@ var possiblePlays = []
 var currentObj = ''
 var time = 0
 var increment = 0
+var moves50 = 0
 
 const allowPlay = () => {
     boardObj.forEach(line => {

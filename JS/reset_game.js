@@ -18,6 +18,11 @@ const resetGame = () => {
 
     blackGiveUp.disabled = true
     whiteGiveUp.disabled = true
+
+    whiteLine.style.width = "100%"
+    blackLine.style.width = "100%"
+    whiteLine.style.backgroundColor = "#12a34b"
+    blackLine.style.backgroundColor = "#12a34b"
     
     let caps = document.getElementsByClassName('capture-area')
     for (const cap of caps) {
