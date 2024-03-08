@@ -2,8 +2,21 @@ const verifiPlayerTime = (color) => {
     return color === 'white' && player === 'white' || color === 'black' && player === 'black'
 }
 
-//Show Path
 
+const refrash = () => {
+    cleanHelpers()
+    letPlayable(true)
+    cancelCastle()
+}
+
+const cleanHelpers = () => {
+    helpersDots.forEach(div => {
+        div.parentNode.removeChild(div)
+    });
+    helpersDots = []
+}
+
+//Show Path
 const paintPath = (moves, captures) => {
     moves.forEach(c => {
         var help = document.createElement('div')
@@ -23,19 +36,6 @@ const paintPath = (moves, captures) => {
     }
     possiblePlays.push(moves, captures)
     letPlayable()
-}
-
-const refrash = () => {
-    cleanHelpers()
-    letPlayable(true)
-    cancelCastle()
-}
-
-const cleanHelpers = () => {
-    helpersDots.forEach(div => {
-        div.parentNode.removeChild(div)
-    });
-    helpersDots = []
 }
 
 const letPlayable = (exclue = false) => {

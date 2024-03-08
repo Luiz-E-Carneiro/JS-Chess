@@ -1,3 +1,4 @@
+var firstMovePawn = ''
 //Sounds
 let captureSound = new Audio('./../../assets/sounds/capture.mp3')
 let whiteMoveSound = new Audio('./../../assets/sounds/move-self.mp3')
@@ -11,41 +12,61 @@ const movePiece = (newSpot) => {
     var img
     var captured = false
     // Delete img    
-    function deletePiece(childrens, newS = false) {
-        for (let i = 0; i < childrens.length; i++) {
-            if (childrens[i].tagName.toLowerCase() === 'img') {
-                img = childrens[i]
-                childrens[i].parentNode.removeChild(childrens[i])
-                if (newS) {
-                    let imgConteiner = document.createElement('div')
-                    imgConteiner.classList.add('image-container')
-                    imgConteiner.appendChild(img)
-                    newSpot.piece.color === 'white' ? capturedWhite.appendChild(imgConteiner) : capturedBlack.appendChild(imgConteiner)
-                    captured = true
+    {
+        function deletePiece(childrens, newS = false) {
+            for (let i = 0; i < childrens.length; i++) {
+                if (childrens[i].tagName.toLowerCase() === 'img') {
+                    img = childrens[i]
+                    childrens[i].parentNode.removeChild(childrens[i])
+                    if (newS) {
+                        let imgConteiner = document.createElement('div')
+                        imgConteiner.classList.add('image-container')
+                        imgConteiner.appendChild(img)
+                        newSpot.piece.color === 'white' ? capturedWhite.appendChild(imgConteiner) : capturedBlack.appendChild(imgConteiner)
+                        captured = true
+                    }
                 }
             }
         }
     }
-    deletePiece(newSpot.cell.children, true)
-    deletePiece(currentObj.cell.children)
     const { column, line } = { ...currentObj }
     const { name, color } = currentObj.piece
+
+    if(!newSpot.piece && currentObj.piece.name === 'pawn' && newSpot.column != column && boardObj[line][column + 1].piece.firstMove || boardObj[line][column - 1].piece.firstMove ) {
+        if ( boardObj[line][column + 1].piece.firstMove ) {
+            deletePiece(boardObj[line][column + 1].cell.children)
+        }else {
+            deletePiece(boardObj[line][column - 1].cell.children)
+        }
+        deletePiece(currentObj.cell.children)
+        captured = true
+        
+    } else {
+        deletePiece(newSpot.cell.children, true)
+        deletePiece(currentObj.cell.children)
+    }
     // Add img in the new cell
     newSpot.cell.appendChild(img)
+
     // get infos in main obj (boardObj)
     var newColumn = newSpot.column
     var newLine = newSpot.line
     var WB = color === 'white' ? 'W' : 'B'
     // Piece Check
-    if (currentObj.piece.firstPlay === false && currentObj.piece.name === 'pawn') {
+    if (currentObj.piece.firstPlay === false && currentObj.piece.name === 'pawn' && newSpot.column === 4 || newSpot.column === 5) {
         boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, firstMove: true, src: `./../assets/pieces/${name}${WB}.png` }
+        if (firstMovePawn != '')disableFirstMove()
+        firstMovePawn = boardObj[newLine][newColumn]
     } else if (currentObj.piece.firstPlay === false && currentObj.piece.name === 'rook' || currentObj.piece.name === 'king') {
         boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, src: `./../assets/pieces/${name}${WB}.png` }
+        disableFirstMove()
     } else if (currentObj.piece.name === 'pawn') {
-        boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, firstMove: false, src: `./../assets/pieces/${name}${WB}.png` }
+        boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, src: `./../assets/pieces/${name}${WB}.png` }
         if (newLine === 0 || newLine === 7) promotePawn(boardObj[newLine][newColumn])
+        disableFirstMove()
     } else {
         boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, src: `./../assets/pieces/${name}${WB}.png` }
+        disableFirstMove()
     }
     boardObj[line][column].piece = false
 
@@ -66,6 +87,7 @@ const movePiece = (newSpot) => {
     incrementation()
 }
 
+
 function startGame() {
     gameStarted = true
     for (let btn of mins) {
@@ -81,6 +103,12 @@ function startGame() {
 
     whiteWidthLine = time * 60
     blackWidthLine = time * 60
+}
+
+function disableFirstMove() {
+    if(firstMovePawn === '') return
+    delete firstMovePawn.piece.firstMove 
+    firstMovePawn = ""
 }
 
 function gameRefrash() {

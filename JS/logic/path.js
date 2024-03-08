@@ -6,6 +6,10 @@ const pawnPath = (divObj, helpKing = false) => {
 
     var moves = []
     var captures = []
+    var exception = {
+        newSpot: undefined,
+        pawn: undefined
+    }
 
     if (!piece.firstPlay) {
         let inFront = boardObj[line - (1 * x)][column]
@@ -37,6 +41,16 @@ const pawnPath = (divObj, helpKing = false) => {
             if (diagonalCell.piece && diagonalCell.piece.color != color) {
                 captures.push(diagonalCell);
             }
+            let side1 = boardObj[line][targetColumn]
+            let side2 = boardObj[line][targetColumn]
+            if (line === 3 && side1.piece.firstMove && side1.piece.color != color || side2.piece.firstMove && side2.piece.color != color) {
+                exception.newSpot = boardObj[line - (1 * x)][targetColumn]
+                exception.pawn = side1  
+            }
+            if ( line === 4 && side2.piece.firstMove && side2.piece.color != color || side1.piece.firstMove && side1.piece.color != color ) {
+                exception.newSpot = boardObj[line - (1 * x)][targetColumn]
+                exception.pawn = side2  
+            }
         }
     }
     if (!getLeft) {
@@ -53,6 +67,9 @@ const pawnPath = (divObj, helpKing = false) => {
             paintPath([], captures)
         } else {
             paintPath(moves, captures)
+            if( exception.newSpot != undefined && exception.pawn != undefined){
+                pawnException( exception)
+            }
         }
     }
     else {
