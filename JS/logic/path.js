@@ -41,15 +41,10 @@ const pawnPath = (divObj, helpKing = false) => {
             if (diagonalCell.piece && diagonalCell.piece.color != color) {
                 captures.push(diagonalCell);
             }
-            let side1 = boardObj[line][targetColumn]
-            let side2 = boardObj[line][targetColumn]
-            if (line === 3 && side1.piece.firstMove && side1.piece.color != color || side2.piece.firstMove && side2.piece.color != color) {
+            let sides = boardObj[line][targetColumn]
+            if (sides.piece.firstMove === true && sides.piece.color != color) {
                 exception.newSpot = boardObj[line - (1 * x)][targetColumn]
-                exception.pawn = side1  
-            }
-            if ( line === 4 && side2.piece.firstMove && side2.piece.color != color || side1.piece.firstMove && side1.piece.color != color ) {
-                exception.newSpot = boardObj[line - (1 * x)][targetColumn]
-                exception.pawn = side2  
+                exception.pawn = sides  
             }
         }
     }
@@ -68,7 +63,12 @@ const pawnPath = (divObj, helpKing = false) => {
         } else {
             paintPath(moves, captures)
             if( exception.newSpot != undefined && exception.pawn != undefined){
+                console.log(exception);
                 pawnException( exception)
+                exception = {
+                    newSpot: undefined,
+                    pawn: undefined
+                }
             }
         }
     }
@@ -286,7 +286,13 @@ const castle = (cellObj) => {
         //Sound
         let castleSound = new Audio('./../../assets/sounds/castle.mp3')
         castleSound.play()
-
+        
+        moves50++
+        if (moves50 === 50) {
+            finishGame(true)
+            result.innerText = 'Draw by 50 moves'
+        }
+        
         refrash()
     }
 }

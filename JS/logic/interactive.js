@@ -63,19 +63,24 @@ const verificCastle = (divObj) => {
     const filteredRooks = allPieces.flat().filter(cell => cell !== null);
     if (filteredRooks.length == 0) return
     filteredRooks.forEach(rookCell => {
-        if (rookCell.column === 0) verificEmptySpaces('left', rookCell.column)
-        if (rookCell.column === 7) verificEmptySpaces('right', rookCell.column)
+        if (rookCell.column === 0) verificPossibleCastle('left', rookCell.column)
+        if (rookCell.column === 7) verificPossibleCastle('right', rookCell.column)
     });
 
-    function verificEmptySpaces(side, rookColumn) {
+    function verificPossibleCastle(side, rookColumn) {
         var emptySpaces = true
+        if(objCheck.length != 0) emptySpaces = false
         if (side === 'left') {
             for (let i = rookColumn + 1; i < column; i++) {
                 if (boardObj[line][i].piece) emptySpaces = false
+                if( color === 'white' &&  boardObj[line][i].whiteKingCannotStay) emptySpaces = false
+                if( color === 'black' &&  boardObj[line][i].blackKingCannotStay) emptySpaces = false
             }
         } else {
             for (let i = rookColumn - 1; i > column; i--) {
                 if (boardObj[line][i].piece) emptySpaces = false
+                if( color === 'white' &&  boardObj[line][i].whiteKingCannotStay) emptySpaces = false
+                if( color === 'black' &&  boardObj[line][i].blackKingCannotStay) emptySpaces = false
             }
         }
 
@@ -418,7 +423,6 @@ function decreaseTime(minutesElement, secondsElement) {
 // Increment
 const incrementation = () => {
     if (increment === 0) return
-    console.log(increment);
     player === 'white' ? addSeconds(whiteMinutes, whiteSeconds) : addSeconds(blackMinutes, blackSeconds)
 }
 
@@ -426,7 +430,6 @@ function addSeconds(minutesElement, secondsElement) {
     let secs = parseInt(secondsElement.innerText)
     let mins = parseInt(minutesElement.innerText)
     let addition = secs + increment
-    console.log(addition)
     if (addition >= 60) {
         let rest = addition - 60
         mins++
@@ -468,7 +471,7 @@ const stopTimerShaking = () => {
 function decreaseTime(minutesElement, secondsElement) {
     let secs = parseInt(secondsElement.innerText)
     let mins = parseInt(minutesElement.innerText)
-    
+
     secs--
     if (secs === -1) {
         secs = 59
@@ -479,20 +482,20 @@ function decreaseTime(minutesElement, secondsElement) {
 }
 
 // Decrease Line
-const decreaseLine = (minutesElement, secondsElement, lineElement, line ) => {
+const decreaseLine = (minutesElement, secondsElement, lineElement, line) => {
     let secs = parseInt(secondsElement.innerText)
     let mins = parseInt(minutesElement.innerText)
 
     let currentWidth = mins * 60 + secs
     let newPercent = ruleOfThree(currentWidth, line)
-    if(newPercent <= 35 && newPercent > 15){
+    if (newPercent <= 35 && newPercent > 15) {
         lineElement.style.backgroundColor = "#f96209"
-    } else if (newPercent <= 15){
+    } else if (newPercent <= 15) {
         lineElement.style.backgroundColor = "#d1120b"
     }
     lineElement.style.width = `${newPercent}%`
 }
 
 function ruleOfThree(width, line) {
-    return (width * 100) / line    
+    return (width * 100) / line
 }

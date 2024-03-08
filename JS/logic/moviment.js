@@ -32,14 +32,18 @@ const movePiece = (newSpot) => {
     const { column, line } = { ...currentObj }
     const { name, color } = currentObj.piece
 
-    if(!newSpot.piece && currentObj.piece.name === 'pawn' && newSpot.column != column && boardObj[line][column + 1].piece.firstMove || boardObj[line][column - 1].piece.firstMove ) {
-        if ( boardObj[line][column + 1].piece.firstMove ) {
-            deletePiece(boardObj[line][column + 1].cell.children)
-        }else {
-            deletePiece(boardObj[line][column - 1].cell.children)
+    if(!newSpot.piece && currentObj.piece.name === 'pawn' && newSpot.column != column ) {
+        if(column - 1 >= 0){
+            if(boardObj[line][column - 1].piece.firstMove) {
+                deletePiece(boardObj[line][column - 1].cell.children, true)
+            }
         }
+        if(column + 1 <= 7) {
+            if(boardObj[line][column + 1].piece.firstMove ){
+                deletePiece(boardObj[line][column + 1].cell.children, true)
+            }
+        }   
         deletePiece(currentObj.cell.children)
-        captured = true
         
     } else {
         deletePiece(newSpot.cell.children, true)
@@ -48,12 +52,15 @@ const movePiece = (newSpot) => {
     // Add img in the new cell
     newSpot.cell.appendChild(img)
 
+    //50 Moves Verify
+    _50Moves(name, newSpot.piece.name)
+
     // get infos in main obj (boardObj)
     var newColumn = newSpot.column
     var newLine = newSpot.line
     var WB = color === 'white' ? 'W' : 'B'
     // Piece Check
-    if (currentObj.piece.firstPlay === false && currentObj.piece.name === 'pawn' && newSpot.column === 4 || newSpot.column === 5) {
+    if (currentObj.piece.firstPlay === false && currentObj.piece.name === 'pawn' && newSpot.line === 3 || newSpot.line === 4) {
         boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, firstMove: true, src: `./../assets/pieces/${name}${WB}.png` }
         if (firstMovePawn != '')disableFirstMove()
         firstMovePawn = boardObj[newLine][newColumn]
@@ -69,7 +76,6 @@ const movePiece = (newSpot) => {
         disableFirstMove()
     }
     boardObj[line][column].piece = false
-
     gameRefrash()
 
     if (booleanCheck) checkSound.play()
@@ -110,6 +116,19 @@ function disableFirstMove() {
     delete firstMovePawn.piece.firstMove 
     firstMovePawn = ""
 }
+
+function _50Moves(movedPiece, newSpotPiece) {
+    if(movedPiece != 'pawn' && newSpotPiece == undefined) {
+        moves50++
+        if(moves50 === 50){
+            finishGame(true)
+            result.innerText = 'Draw by 50 moves'
+        }
+    } else {
+        moves50 = 0
+    }
+}
+
 
 function gameRefrash() {
     refrash()

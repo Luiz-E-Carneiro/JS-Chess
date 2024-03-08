@@ -104,7 +104,7 @@ const boardArea = document.getElementById('board')
 const realoadBoard = () => {
     boardArea.innerHTML = ''
     var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-    var numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+    var numbers = [8,7,6,5,4,3,2,1]
     var allCells = [];
     for (let i = 0; i < boardObj.length; i++) {
         let color = i % 2 !== 0 ? 'black' : 'white';
