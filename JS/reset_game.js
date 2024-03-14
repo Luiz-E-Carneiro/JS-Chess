@@ -54,6 +54,6 @@ const resetGame = () => {
     }
 
     realoadBoard()
-    gameRefrash()
-    refrash()
+    gameRefresh()
+    refresh()
 }

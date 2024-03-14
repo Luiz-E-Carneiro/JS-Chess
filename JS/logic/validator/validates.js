@@ -1,10 +1,4 @@
-const getPieces = (color) => {
-    const coloredPieces = boardObj.map(line =>
-        line.map(cell => cell.piece && cell.piece.color === color ? cell : null)
-    );
-    const filteredPieces = coloredPieces.flat().filter(cell => cell !== null);
-    return filteredPieces
-};
+
 
 const validateCheck = () => {
     var whitePieces = getPieces('white')

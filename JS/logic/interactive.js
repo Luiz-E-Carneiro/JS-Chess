@@ -2,8 +2,7 @@ const verifiPlayerTime = (color) => {
     return color === 'white' && player === 'white' || color === 'black' && player === 'black'
 }
 
-
-const refrash = () => {
+const refresh = () => {
     cleanHelpers()
     letPlayable(true)
     cancelCastle()
@@ -112,6 +111,14 @@ const cancelCastle = () => {
     possibleCastle = { left: null, right: null }
 }
 
+const getPieces = (color) => {
+    const coloredPieces = boardObj.map(line =>
+        line.map(cell => cell.piece && cell.piece.color === color ? cell : null)
+    )
+    var filteredPieces = coloredPieces.flat().filter(cell => cell !== null)
+    return filteredPieces
+}
+
 // Promotion
 var blackChoose = document.getElementById('promoteBlackArea')
 var whiteChoose = document.getElementById('promoteWhiteArea')
@@ -154,7 +161,7 @@ const promotePawn = (cellObj) => {
                 this.parentNode.style.visibility = 'hidden'
             }, 150);
 
-            gameRefrash()
+            gameRefresh()
         })
     }
 }
@@ -177,17 +184,23 @@ const givePoint = () => {
 }
 
 // Finish Game
-const finishGame = () => {
-    declineSound.play()
+const finishGame = (drownedKing = false) => {
+    if(drownedKing){
+        result.innerText = 'King Drowned'
+        addHalfPoints()
+
+    }else {
+        declineSound.play()
+        player === 'white' ? result.innerText = 'Black Won' : result.innerText = 'White won'
+        player === 'white' ? player = 'black' : player = 'white'
+        givePoint()
+    }
     gameEnded = true
-    player === 'white' ? result.innerText = 'Black Won' : result.innerText = 'White won'
     whiteGiveUp.disabled = true
     blackGiveUp.disabled = true
     whiteDraw.disabled = true
     blackDraw.disabled = true
     stopTimerShaking()
-    player === 'white' ? player = 'black' : player = 'white'
-    givePoint()
 }
 
 // Reset Score
@@ -270,7 +283,7 @@ const changeNameBoard = () => {
     }
 }
 
-// Give Up Fuction
+// Give Up
 
 const whiteGiveUp = document.getElementById('whiteGiveUp')
 const blackGiveUp = document.getElementById('blackGiveUp')
@@ -323,13 +336,17 @@ const draw = (btn1, btn2) => {
     btn2.parentNode.removeChild(btn2)
     blackDraw.style.display = 'flex'
     whiteDraw.style.display = 'flex'
-    pointsP1.innerText = Number(pointsP1.innerText) + 0.5
-    pointsP2.innerText = Number(pointsP2.innerText) + 0.5
+    result.innerText = 'Draw'
+    addHalfPoints()
+}
+
+const addHalfPoints = () => {
     gameEnded = true
-    stopTimerShaking()
     let drawSound = new Audio('./../assets/sounds/game-draw.mp3')
     drawSound.play()
-    result.innerText = 'Draw'
+    pointsP1.innerText = Number(pointsP1.innerText) + 0.5
+    pointsP2.innerText = Number(pointsP2.innerText) + 0.5
+    stopTimerShaking()
 }
 
 // SET TIMER

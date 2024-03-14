@@ -22,19 +22,19 @@ const allowPlay = () => {
                     timerShaking()
                 } else if (obj.possibleMove) {
                     movePiece(obj)
-                    refrash()
+                    refresh()
                     player === 'white' ? player = 'black' : player = 'white'
                     timerShaking()
                 } else {
                     if (currentObj === obj) {
                         currentObj = ''
-                        refrash()
+                        refresh()
                     } else {
                         currentObj = obj
                         if (verifiPlayerTime(obj.piece.color) && !obj.cannotMove) {
                             if (!needHelp(obj)) verificCell(currentObj)
                         } else {
-                            refrash()
+                            refresh()
                         }
                     }
                 }
@@ -44,7 +44,7 @@ const allowPlay = () => {
 }
 
 const verificCell = (divObj) => {
-    refrash()
+    refresh()
     let { cell, piece } = divObj
     var img = false
 

@@ -32,19 +32,19 @@ const movePiece = (newSpot) => {
     const { column, line } = { ...currentObj }
     const { name, color } = currentObj.piece
 
-    if(!newSpot.piece && currentObj.piece.name === 'pawn' && newSpot.column != column ) {
-        if(column - 1 >= 0){
-            if(boardObj[line][column - 1].piece.firstMove) {
+    if (!newSpot.piece && currentObj.piece.name === 'pawn' && newSpot.column != column) {
+        if (column - 1 >= 0) {
+            if (boardObj[line][column - 1].piece.firstMove) {
                 deletePiece(boardObj[line][column - 1].cell.children, true)
             }
         }
-        if(column + 1 <= 7) {
-            if(boardObj[line][column + 1].piece.firstMove ){
+        if (column + 1 <= 7) {
+            if (boardObj[line][column + 1].piece.firstMove) {
                 deletePiece(boardObj[line][column + 1].cell.children, true)
             }
-        }   
+        }
         deletePiece(currentObj.cell.children)
-        
+
     } else {
         deletePiece(newSpot.cell.children, true)
         deletePiece(currentObj.cell.children)
@@ -62,7 +62,7 @@ const movePiece = (newSpot) => {
     // Piece Check
     if (currentObj.piece.firstPlay === false && currentObj.piece.name === 'pawn' && newSpot.line === 3 || newSpot.line === 4) {
         boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, firstMove: true, src: `./../assets/pieces/${name}${WB}.png` }
-        if (firstMovePawn != '')disableFirstMove()
+        if (firstMovePawn != '') disableFirstMove()
         firstMovePawn = boardObj[newLine][newColumn]
     } else if (currentObj.piece.firstPlay === false && currentObj.piece.name === 'rook' || currentObj.piece.name === 'king') {
         boardObj[newLine][newColumn].piece = { name: name, color: color, firstPlay: true, src: `./../assets/pieces/${name}${WB}.png` }
@@ -76,7 +76,6 @@ const movePiece = (newSpot) => {
         disableFirstMove()
     }
     boardObj[line][column].piece = false
-    gameRefrash()
 
     if (booleanCheck) checkSound.play()
     else if (captured) captureSound.play()
@@ -90,7 +89,10 @@ const movePiece = (newSpot) => {
         whiteGiveUp.disabled ? whiteGiveUp.disabled = false : whiteGiveUp.disabled = true
         blackGiveUp.disabled ? blackGiveUp.disabled = false : blackGiveUp.disabled = true
     }
+
+    gameRefresh()
     incrementation()
+    gameVerifications()
 }
 
 
@@ -112,15 +114,15 @@ function startGame() {
 }
 
 function disableFirstMove() {
-    if(firstMovePawn === '') return
-    delete firstMovePawn.piece.firstMove 
+    if (firstMovePawn === '') return
+    delete firstMovePawn.piece.firstMove
     firstMovePawn = ""
 }
 
 function _50Moves(movedPiece, newSpotPiece) {
-    if(movedPiece != 'pawn' && newSpotPiece == undefined) {
+    if (movedPiece != 'pawn' && newSpotPiece == undefined) {
         moves50++
-        if(moves50 === 50){
+        if (moves50 === 50) {
             finishGame(true)
             result.innerText = 'Draw by 50 moves'
         }
@@ -129,9 +131,104 @@ function _50Moves(movedPiece, newSpotPiece) {
     }
 }
 
+const gameVerifications = () => {
+    let playedColor = player
+    let otherColor = player === 'white' ? 'black' : 'white'
+    
+    var playedPieces = getPieces(playedColor)
+    var otherPieces = getPieces(otherColor)
 
-function gameRefrash() {
-    refrash()
+    verificationDrownedKing(otherPieces)
+    verifyPiecesAmount(playedPieces, otherPieces)
+}
+
+const verifyPiecesAmount = (array1, array2) => {
+
+    if(array1.length === 1 && array2.length === 1){
+        finishGame(true)
+        result.innerText = 'Insufficient Material'
+    } else if( array1.length === 1 && array2.length === 2 || array1.length === 2 && array2.length === 1){
+        
+        if(array1.length > 1) {
+            array1.forEach(piecesObj => {
+                if(piecesObj.piece.name === 'bishop' || piecesObj.piece.name === 'knight') {
+                    finishGame(true)
+                }
+            });
+        } else {
+            array2.forEach(piecesObj => {
+                if(piecesObj.piece.name === 'bishop' || piecesObj.piece.name === 'knight') {
+                    finishGame(true)
+                }
+            });
+        }
+
+    } else if( array1.length === 2 && array2.length === 2 ) {
+        let condition1 = false
+        let condition2 = false
+        array1.forEach(piecesObj => {
+            if(piecesObj.piece.name === 'bishop' || piecesObj.piece.name === 'knight') {
+                condition1 = true
+            }
+        });
+        array2.forEach(piecesObj => {
+            if(piecesObj.piece.name === 'bishop' || piecesObj.piece.name === 'knight') {
+                condition2 = true
+            }
+        });
+
+        if(condition1 && condition2) finishGame(true)
+
+    } else if( array1.length === 1 && array2.length === 3 || array1.length === 3 && array2.length === 1 ) {
+        
+        // 2 Knights or 2 bishops . . .
+
+    }
+
+
+}
+
+const verificationDrownedKing = (pieces) => {
+    if (verifyDrownedKing(pieces)) {
+        finishGame(true)
+    }
+}
+
+const verifyDrownedKing = (arrayPieces) => {
+    let notDrowned = true
+
+    arrayPieces.forEach(pieceObj => {
+
+        switch (pieceObj.piece.name) {
+            case 'pawn':
+                if(pawnPath(pieceObj, false, true)) notDrowned = false
+                break;
+            case 'kight':
+                if(knightPath(pieceObj, false, true)) notDrowned = false
+                break;
+            case 'bishop':
+                if(bishopPath(pieceObj, false, true)) notDrowned = false
+
+                break;
+            case 'rook':
+                if(rookPath(pieceObj, false, true)) notDrowned = false
+
+                break;
+            case 'queen':
+                if(queenPath(pieceObj, false, true)) notDrowned = false
+
+                break;
+            case 'king':
+                if(kingPath(pieceObj, false, true)) notDrowned = false
+                break;
+        }
+    });
+
+    return notDrowned
+}
+
+function gameRefresh() {
+    refresh()
     resetLimits()
     resetCheck()
     resetBlockedCells()

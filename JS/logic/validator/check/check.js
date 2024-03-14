@@ -42,7 +42,7 @@ const blockAllPieces = (color, leftPiece = undefined) => {
 }
 
 const needHelp = (currentObj) => {
-    refrash()
+    refresh()
     if(helpKingObjs.length == 0 || currentObj.piece.name === 'king') return false
     for (let i = 0; i < helpKingObjs.length; i++) {
         if(helpKingObjs[i].helpPiece === currentObj){

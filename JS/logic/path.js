@@ -1,4 +1,4 @@
-const pawnPath = (divObj, helpKing = false) => {
+const pawnPath = (divObj, helpKing = false, canPlay) => {
     const { line, column, piece } = divObj;
     var color = piece.color
     var x
@@ -57,7 +57,9 @@ const pawnPath = (divObj, helpKing = false) => {
         checkAndPushCapture(column + 1)
     }
 
-    if (!helpKing) {
+    if(canPlay){
+        return moves.length > 0 || captures.length > 0
+    }else if (!helpKing) {
         if (divObj.onlyCapture) {
             paintPath([], captures)
         } else {
@@ -77,7 +79,7 @@ const pawnPath = (divObj, helpKing = false) => {
     }
 }
 
-const rookPath = (divObj, helpKing = false) => {
+const rookPath = (divObj, helpKing = false, canPlay) => {
     const { line, column, piece } = divObj;
     var color = piece.color
     var moves = []
@@ -88,14 +90,16 @@ const rookPath = (divObj, helpKing = false) => {
     else if (divObj.onlyLR) cellsToPaint = getVerticalHorizontal(line, column, color, ['left', 'right'], moves, captures)
     else cellsToPaint = getVerticalHorizontal(line, column, color, ['left', 'right', 'up', 'down'], moves, captures)
 
-    if (!helpKing) paintPath(cellsToPaint[0], cellsToPaint[1])
+    if(canPlay){
+        return cellsToPaint[0].length > 0 || cellsToPaint[1].length > 0
+    }else if (!helpKing) paintPath(cellsToPaint[0], cellsToPaint[1])
     else {
         verificHelp(cellsToPaint[0], cellsToPaint[1], divObj)
     }
 
 }
 
-const knightPath = (divObj, helpKing = false) => {
+const knightPath = (divObj, helpKing = false, canPlay) => {
     const { line, column, piece } = divObj;
     var color = piece.color
     var moves = []
@@ -124,14 +128,15 @@ const knightPath = (divObj, helpKing = false) => {
         if (column - 1 >= 0) addMove(line - 1, column - 2)
     }
 
-    if (!helpKing) paintPath(moves, captures)
+    if(canPlay){
+        return moves.length > 0 || captures.length > 0
+    }else if (!helpKing) paintPath(moves, captures)
     else {
         verificHelp(moves, captures, divObj)
     }
-
 }
 
-const bishopPath = (divObj, helpKing = false) => {
+const bishopPath = (divObj, helpKing = false, canPlay) => {
     const { line, column, piece } = divObj;
     var color = piece.color
     var moves = []
@@ -149,11 +154,50 @@ const bishopPath = (divObj, helpKing = false) => {
         cellsToPaint = getDiagonals(line, column, color, ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'], moves, captures)
     }
 
-    if (!helpKing) paintPath(cellsToPaint[0], cellsToPaint[1])
+    if(canPlay){
+        return cellsToPaint[0].length > 0 || cellsToPaint[1].length > 0
+    }else if (!helpKing) paintPath(cellsToPaint[0], cellsToPaint[1])
     else {
         verificHelp(cellsToPaint[0], cellsToPaint[1], divObj)
     }
+}
 
+const queenPath = (divObj, helpKing = false, canPlay) => {
+    const { line, column, piece } = divObj
+    var color = piece.color
+    var moves = []
+    var captures = []
+
+    var verticalHorizontal = [[], []]
+    var diagonals = [[], []]
+
+    if (divObj.onlyUD == true || divObj.onlyLR == true || divObj.onlyTLBR == true || divObj.onlyTRBL == true) {
+        //    onlyLR  ;   onlyUD  
+        if (divObj.onlyUD) {
+            verticalHorizontal = getVerticalHorizontal(line, column, color, ['up', 'down'], moves, captures)
+        } else if (divObj.onlyLR) {
+            verticalHorizontal = getVerticalHorizontal(line, column, color, ['left', 'right'], moves, captures)
+        }
+
+        //      onlyTLBR    ;   onlyTRBL
+        if (divObj.onlyTLBR) {
+            diagonals = getDiagonals(line, column, color, ['topLeft', 'bottomRight'], moves, captures)
+        } else if (divObj.onlyTRBL) {
+            diagonals = getDiagonals(line, column, color, ['topRight', 'bottomLeft'], moves, captures)
+        }
+    } else {
+        verticalHorizontal = getVerticalHorizontal(line, column, color, ['left', 'right', 'up', 'down'], moves, captures)
+        diagonals = getDiagonals(line, column, color, ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'], moves, captures)
+    }
+    var allMoves = verticalHorizontal[0].concat(diagonals[0])
+    var allCaptures = verticalHorizontal[1].concat(diagonals[1])
+
+    if(canPlay){
+        return allMoves.length > 0 || allCaptures.length > 0
+    }else if (!helpKing) paintPath(allMoves, allCaptures)
+    else {
+        verificHelp(allMoves, allCaptures, divObj)
+    }
 }
 
 const kingPath = (divObj, emptySpaces = false, scape = false) => {
@@ -186,47 +230,10 @@ const kingPath = (divObj, emptySpaces = false, scape = false) => {
     }
     if (scape) {
         return moves.length > 0 || captures.length > 0
-    }
-    if (emptySpaces) {
+    } else if (emptySpaces) {
         return moves.length === 0 && captures.length === 0
     } else {
         paintPath(moves, captures)
-    }
-}
-
-const queenPath = (divObj, helpKing = false) => {
-    const { line, column, piece } = divObj
-    var color = piece.color
-    var moves = []
-    var captures = []
-
-    var verticalHorizontal = [[], []]
-    var diagonals = [[], []]
-
-    if (divObj.onlyUD == true || divObj.onlyLR == true || divObj.onlyTLBR == true || divObj.onlyTRBL == true) {
-        //    onlyLR  ;   onlyUD  
-        if (divObj.onlyUD) {
-            verticalHorizontal = getVerticalHorizontal(line, column, color, ['up', 'down'], moves, captures)
-        } else if (divObj.onlyLR) {
-            verticalHorizontal = getVerticalHorizontal(line, column, color, ['left', 'right'], moves, captures)
-        }
-
-        //      onlyTLBR    ;   onlyTRBL
-        if (divObj.onlyTLBR) {
-            diagonals = getDiagonals(line, column, color, ['topLeft', 'bottomRight'], moves, captures)
-        } else if (divObj.onlyTRBL) {
-            diagonals = getDiagonals(line, column, color, ['topRight', 'bottomLeft'], moves, captures)
-        }
-    } else {
-        verticalHorizontal = getVerticalHorizontal(line, column, color, ['left', 'right', 'up', 'down'], moves, captures)
-        diagonals = getDiagonals(line, column, color, ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'], moves, captures)
-    }
-    var allMoves = verticalHorizontal[0].concat(diagonals[0])
-    var allCaptures = verticalHorizontal[1].concat(diagonals[1])
-
-    if (!helpKing) paintPath(allMoves, allCaptures)
-    else {
-        verificHelp(allMoves, allCaptures, divObj)
     }
 }
 
@@ -282,7 +289,6 @@ const castle = (cellObj) => {
                 }
             }
         }
-
         //Sound
         let castleSound = new Audio('./../../assets/sounds/castle.mp3')
         castleSound.play()
@@ -292,8 +298,7 @@ const castle = (cellObj) => {
             finishGame(true)
             result.innerText = 'Draw by 50 moves'
         }
-        
-        refrash()
+        refresh()
     }
 }
 
