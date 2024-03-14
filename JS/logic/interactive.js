@@ -184,12 +184,14 @@ const givePoint = () => {
 }
 
 // Finish Game
-const finishGame = (drownedKing = false) => {
+const finishGame = (drownedKing = false, draw = false) => {
     if(drownedKing){
         result.innerText = 'King Drowned'
         addHalfPoints()
-
-    }else {
+    } if(draw){
+        result.innerText = draw
+        addHalfPoints()
+    } else {
         declineSound.play()
         player === 'white' ? result.innerText = 'Black Won' : result.innerText = 'White won'
         player === 'white' ? player = 'black' : player = 'white'
