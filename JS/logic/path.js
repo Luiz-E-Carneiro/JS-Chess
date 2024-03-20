@@ -28,21 +28,33 @@ const pawnPath = (divObj, helpKing = false, canPlay) => {
         getLeft = column === 0 ? false : getLeft;
         getRight = column === 7 ? false : getRight;
     }
+    console.log('--------------');
+    console.log(boardObj);
     const checkAndPushCapture = (targetColumn) => {
         var diagonalCell = boardObj[line - (1 * x)][targetColumn]
-
-        if (divObj.onlyCapture) {
-            attackingPieces.forEach(piece => {
-                if (diagonalCell.piece && diagonalCell.piece.color != color & diagonalCell.piece.name === piece.name) {
-                    captures.push(diagonalCell);
-                }
-            });
+        if(divObj.onlyUD || divObj.cannotMove) return
+        if (divObj.onlyCaptureTL || divObj.onlyCaptureTR ) {
+            if(targetColumn > column &&  divObj.onlyCaptureTR){
+                attackingPieces.forEach(piece => {
+                    console.log(attackingPieces);
+                    if (diagonalCell.piece && diagonalCell.piece.color != color & diagonalCell.piece.name === piece.name) {
+                        captures.push(diagonalCell);
+                    }
+                });
+            }else if (targetColumn < column &&  divObj.onlyCaptureTL){
+                attackingPieces.forEach(piece => {
+                    console.log(attackingPieces);
+                    if (diagonalCell.piece && diagonalCell.piece.color != color & diagonalCell.piece.name === piece.name) {
+                        captures.push(diagonalCell);
+                    }
+                });
+            }
         } else {
             if (diagonalCell.piece && diagonalCell.piece.color != color) {
                 captures.push(diagonalCell);
             }
             let sides = boardObj[line][targetColumn]
-            if (sides.piece.firstMove === true && sides.piece.color != color) {
+            if (sides.piece.firstMove === true && sides.piece.color != color && sides.piece.name === 'pawn') {
                 exception.newSpot = boardObj[line - (1 * x)][targetColumn]
                 exception.pawn = sides  
             }
@@ -65,8 +77,7 @@ const pawnPath = (divObj, helpKing = false, canPlay) => {
         } else {
             paintPath(moves, captures)
             if( exception.newSpot != undefined && exception.pawn != undefined){
-                console.log(exception);
-                pawnException( exception)
+                pawnException(exception)
                 exception = {
                     newSpot: undefined,
                     pawn: undefined

@@ -19,6 +19,7 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
 
             if (objSpot.piece.name === 'king' && objSpot.piece.color !== color) {
                 objCheck.push({ attackPiece: pieceObj, cellsUntilKing: objSpot, objKing: objSpot })
+                console.log(cellsArray);
                 booleanCheck = true
             }
         });
@@ -26,7 +27,7 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
         if (cellsArray.length > 0) {
             cellsArray.forEach(direction => {
                 direction.forEach(objSpot => {
-
+                    
                     if (color === 'white') {
                         objSpot.blackKingCannotStay = true
                         cellsBlocked.white.push(objSpot)
@@ -38,6 +39,7 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
 
                     if (objSpot.piece.name === 'king' && objSpot.piece.color !== color) {
                         objCheck.push({ attackPiece: pieceObj, cellsUntilKing: direction, objKing: objSpot })
+                        console.log(cellsArray);
                         booleanCheck = true
                     }
                 });

@@ -38,7 +38,7 @@ const limitDefenderPiece = (defendingPiece, direc) => {
     //Diagonal
     else if (direc === 'topLeft' || direc === 'bottomRight') {
         if(name === 'pawn'){
-            boardObj[line][column].onlyCapture = true
+            boardObj[line][column].onlyCaptureTL = true
         }else if (name === 'queen' || name === 'bishop') {
             boardObj[line][column].onlyTLBR = true
         } else {
@@ -46,7 +46,7 @@ const limitDefenderPiece = (defendingPiece, direc) => {
         }
     } else if (direc === 'topRight' || direc === 'bottomLeft') {
         if(name === 'pawn'){
-            boardObj[line][column].onlyCapture = true
+            boardObj[line][column].onlyCaptureTR = true
         } else if (name === 'queen' || name === 'bishop') {
             boardObj[line][column].onlyTRBL = true
         } else {

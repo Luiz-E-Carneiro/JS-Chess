@@ -48,11 +48,13 @@ const movePiece = (newSpot) => {
         if (column - 1 >= 0) {
             if (boardObj[line][column - 1].piece.firstMove) {
                 deletePiece(boardObj[line][column - 1].cell.children, true)
+                boardObj[line][column - 1].piece = false
             }
         }
         if (column + 1 <= 7) {
             if (boardObj[line][column + 1].piece.firstMove) {
                 deletePiece(boardObj[line][column + 1].cell.children, true)
+                boardObj[line][column + 1].piece = false
             }
         }
         deletePiece(currentObj.cell.children)
@@ -89,8 +91,7 @@ const movePiece = (newSpot) => {
     }
     boardObj[line][column].piece = false
 
-    if (booleanCheck) checkSound.play()
-    else if (captured) captureSound.play()
+    if (captured) captureSound.play()
     else player === 'white' ? whiteMoveSound.play() : blackMoveSound.play()
 
     // Game Started
@@ -102,10 +103,10 @@ const movePiece = (newSpot) => {
         blackGiveUp.disabled ? blackGiveUp.disabled = false : blackGiveUp.disabled = true
     }
 
-    gameRefresh()
     incrementation()
     gameVerifications()
     verifyRepetition(currentObj, newSpot)
+    gameRefresh()
 }
 
 let rep1 = 0
