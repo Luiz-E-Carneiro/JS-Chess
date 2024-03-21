@@ -19,7 +19,6 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
 
             if (objSpot.piece.name === 'king' && objSpot.piece.color !== color) {
                 objCheck.push({ attackPiece: pieceObj, cellsUntilKing: objSpot, objKing: objSpot })
-                console.log(cellsArray);
                 booleanCheck = true
             }
         });
@@ -39,14 +38,52 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
 
                     if (objSpot.piece.name === 'king' && objSpot.piece.color !== color) {
                         objCheck.push({ attackPiece: pieceObj, cellsUntilKing: direction, objKing: objSpot })
-                        console.log(cellsArray);
                         booleanCheck = true
+                        let cellToBase = direction[direction.length-2]
+                        if(direction.length === 1)blockOppositeCell(objSpot, pieceObj)
+                        else blockOppositeCell(objSpot, cellToBase)
                     }
                 });
             });
         }
     }
+}
 
+const blockOppositeCell = (kingObj, basedCell) => { 
+    let kingColor   = kingObj.piece.color
+    let kingColumn  = kingObj.column
+    let kingLine    = kingObj.line
+    let basedColumn = basedCell.column
+    let basedLine   = basedCell.line
+    let newColumn
+    let newLine
+
+    if(kingColumn != 7 && kingColumn != 0) {
+        if(basedColumn > kingColumn) {
+            newColumn = kingColumn - 1
+        } else if (basedColumn === kingColumn){
+            newColumn = kingColumn
+        } else {
+            newColumn = kingColumn + 1
+        }
+    }
+    if(kingLine != 7 && kingLine != 0) {
+        if(basedLine > kingLine) {
+            newLine = kingLine - 1
+        } else if (basedLine === kingLine){
+            newLine = kingLine
+        } else {
+            newLine = kingLine + 1
+        }
+    }
+
+    if(kingColor === 'white'){
+        boardObj[newLine][newColumn].whiteKingCannotStay = true
+        cellsBlocked.white.push(boardObj[newLine][newColumn])
+    }else {
+        boardObj[newLine][newColumn].blackKingCannotStay = true
+        cellsBlocked.black.push(boardObj[newLine][newColumn])
+    }
 }
 
 const resetBlockedCells = () => {

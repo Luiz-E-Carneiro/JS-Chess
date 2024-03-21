@@ -28,8 +28,6 @@ const pawnPath = (divObj, helpKing = false, canPlay) => {
         getLeft = column === 0 ? false : getLeft;
         getRight = column === 7 ? false : getRight;
     }
-    console.log('--------------');
-    console.log(boardObj);
     const checkAndPushCapture = (targetColumn) => {
         var diagonalCell = boardObj[line - (1 * x)][targetColumn]
         if(divObj.onlyUD || divObj.cannotMove) return
