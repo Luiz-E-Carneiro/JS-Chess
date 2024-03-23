@@ -219,7 +219,8 @@ const verifyPiecesAmount = (array1, array2) => {
         if (condition1 && condition2) finishGame(false, 'Draw: Insufficient Material')
 
     } else if (array1.length === 1 && array2.length === 3 || array1.length === 3 && array2.length === 1) {
-        let justOne, withouKing
+        let justOne
+        let withouKing
         if (array1 > 1) {
             withouKing = array1.filter(objPiece => objPiece.piece.name != 'king')
             justOne = array2

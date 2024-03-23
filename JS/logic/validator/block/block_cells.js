@@ -76,13 +76,14 @@ const blockOppositeCell = (kingObj, basedCell) => {
             newLine = kingLine + 1
         }
     }
-
-    if(kingColor === 'white'){
-        boardObj[newLine][newColumn].whiteKingCannotStay = true
-        cellsBlocked.white.push(boardObj[newLine][newColumn])
-    }else {
-        boardObj[newLine][newColumn].blackKingCannotStay = true
-        cellsBlocked.black.push(boardObj[newLine][newColumn])
+    if(newColumn != undefined && newLine != undefined){   
+        if(kingColor === 'white'){
+            boardObj[newLine][newColumn].whiteKingCannotStay = true
+            cellsBlocked.white.push(boardObj[newLine][newColumn])
+        }else {
+            boardObj[newLine][newColumn].blackKingCannotStay = true
+            cellsBlocked.black.push(boardObj[newLine][newColumn])
+        }
     }
 }
 
