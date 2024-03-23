@@ -17,15 +17,20 @@ const verificCheck = () => {
     let color = objKing.piece.color
 
     if (objCheck.length > 1) { // Double Check
-        blockAllPieces(color)
-        EmptySpacesToKing(objKing, true)
+        if(kingPath(objKing, true))checkMate(objKing)
+        else {
+            helpKingObjs = []
+            checkSound.play()
+            blockAllPieces(color, 'king')
+        }
+
     } else {
         helpKing(color)
         checkSound.play()
         if (!kingPath(objKing, false, true) && helpKingObjs.length === 0){
             checkMate(objKing)
         } else if(helpKingObjs.length === 0){
-            blockAllPieces(objKing.piece.color, 'king')
+            blockAllPieces(color, 'king')
         } 
     }
 
