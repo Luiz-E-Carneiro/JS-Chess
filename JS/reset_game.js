@@ -4,7 +4,7 @@ const resetGame = () => {
     timerWhite.style.animation = 'none'
     boardArea.innerHTML = ''
     boardObj = JSON.parse(JSON.stringify(patternBoard))
-    defaultSides ? defaultSides = false : defaultSides
+    defaultSides === true ? defaultSides = false : defaultSides = true
     player = 'white'
     gameEnded = false
     gameStarted = false
