@@ -30,19 +30,24 @@ const pawnPath = (divObj, helpKing = false, canPlay) => {
     }
     const checkAndPushCapture = (targetColumn) => {
         var diagonalCell = boardObj[line - (1 * x)][targetColumn]
-        if(divObj.onlyUD || divObj.cannotMove) return
+        if(divObj.onlyUD === true || divObj.cannotMove === true) return
         if (divObj.onlyCaptureTL || divObj.onlyCaptureTR ) {
-            if(targetColumn > column &&  divObj.onlyCaptureTR){
-                attackingPieces.forEach(piece => {
-                    console.log(attackingPieces);
-                    if (diagonalCell.piece && diagonalCell.piece.color != color & diagonalCell.piece.name === piece.name) {
+            if(
+                targetColumn > column && divObj.onlyCaptureTR && player === 'white' ||
+                targetColumn < column && divObj.onlyCaptureTR && player === 'black' 
+            ){
+                attackingPieces.forEach(p => {
+                    if (diagonalCell.piece && diagonalCell.piece.color != color) {
                         captures.push(diagonalCell);
+
                     }
                 });
-            }else if (targetColumn < column &&  divObj.onlyCaptureTL){
-                attackingPieces.forEach(piece => {
-                    console.log(attackingPieces);
-                    if (diagonalCell.piece && diagonalCell.piece.color != color & diagonalCell.piece.name === piece.name) {
+            }else if(
+                targetColumn < column && divObj.onlyCaptureTL && player === 'white' ||
+                targetColumn > column && divObj.onlyCaptureTL && player === 'black' 
+            ){
+                attackingPieces.forEach(p => {
+                    if (diagonalCell.piece && diagonalCell.piece.color != color ) {
                         captures.push(diagonalCell);
                     }
                 });
@@ -70,7 +75,7 @@ const pawnPath = (divObj, helpKing = false, canPlay) => {
     if(canPlay){
         return moves.length > 0 || captures.length > 0
     }else if (!helpKing) {
-        if (divObj.onlyCapture) {
+        if (divObj.onlyCaptureTL || divObj.onlyCaptureTR) {
             paintPath([], captures)
         } else {
             paintPath(moves, captures)
