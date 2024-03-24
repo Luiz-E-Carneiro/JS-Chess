@@ -5,7 +5,7 @@ const result = document.getElementById('result')
 
 const checkMate = (objKing) => {
     gameEnded = true
-    let endGame = new Audio('./../../../../assets/sounds/game-end.mp3')
+    let endGame = new Audio('assets/sounds/game-end.mp3')
     endGame.play()
     objKing.cell.classList.add('checkMate')
 

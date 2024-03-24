@@ -12,10 +12,10 @@ var movementHistory = {
 
 var firstMovePawn = ''
 //Sounds
-let captureSound = new Audio('./../../assets/sounds/capture.mp3')
-let whiteMoveSound = new Audio('./../../assets/sounds/move-self.mp3')
-let blackMoveSound = new Audio('./../../assets/sounds/move-opponent.mp3')
-let checkSound = new Audio('./../../assets/sounds/move-check.mp3')
+let captureSound = new Audio('assets/sounds/capture.mp3')
+let whiteMoveSound = new Audio('assets/sounds/move-self.mp3')
+let blackMoveSound = new Audio('assets/sounds/move-opponent.mp3')
+let checkSound = new Audio('assets/sounds/move-check.mp3')
 
 const movePiece = (newSpot) => {
     let capturedAreas = document.getElementsByClassName('capture-area')

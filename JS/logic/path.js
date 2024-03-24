@@ -304,7 +304,7 @@ const castle = (cellObj) => {
             }
         }
         //Sound
-        let castleSound = new Audio('./../../assets/sounds/castle.mp3')
+        let castleSound = new Audio('assets/sounds/castle.mp3')
         castleSound.play()
         
         moves50++

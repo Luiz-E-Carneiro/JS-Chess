@@ -129,10 +129,10 @@ const promotePawn = (cellObj) => {
     whiteChoose.innerHTML = ''
     var letter = color === 'white' ? 'W' : 'B'
     var pieces = [
-        `./../../assets/pieces/knight${letter}.png`,
-        `./../../assets/pieces/bishop${letter}.png`,
-        `./../../assets/pieces/rook${letter}.png`,
-        `./../../assets/pieces/queen${letter}.png`,
+        `assets/pieces/knight${letter}.png`,
+        `assets/pieces/bishop${letter}.png`,
+        `assets/pieces/rook${letter}.png`,
+        `assets/pieces/queen${letter}.png`,
     ]
     var names = ['knight', 'bishop', 'rook', 'queen']
     for (let i = 0; i < 4; i++) {
