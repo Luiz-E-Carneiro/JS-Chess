@@ -333,24 +333,6 @@ const resetDraw = (btn1, btn2) => {
     btn2.parentNode.removeChild(btn2)
 }
 
-const draw = (btn1, btn2) => {
-    btn1.parentNode.removeChild(btn1)
-    btn2.parentNode.removeChild(btn2)
-    blackDraw.style.display = 'flex'
-    whiteDraw.style.display = 'flex'
-    result.innerText = 'Draw'
-    addHalfPoints()
-}
-
-const addHalfPoints = () => {
-    gameEnded = true
-    let drawSound = new Audio('./../assets/sounds/game-draw.mp3')
-    drawSound.play()
-    pointsP1.innerText = Number(pointsP1.innerText) + 0.5
-    pointsP2.innerText = Number(pointsP2.innerText) + 0.5
-    stopTimerShaking()
-}
-
 // SET TIMER
 var whiteMinutes = document.getElementById('whiteMinutes')
 var whiteSeconds = document.getElementById('whiteSeconds')
