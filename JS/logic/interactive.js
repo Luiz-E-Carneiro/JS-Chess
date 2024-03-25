@@ -188,8 +188,8 @@ const finishGame = (drownedKing = false, draw = false) => {
     if(drownedKing){
         result.innerText = 'King Drowned'
         addHalfPoints()
-    } if(draw){
-        result.innerText = draw
+    } else if(draw){
+        result.innerText = `${draw}`
         addHalfPoints()
     } else {
         declineSound.play()

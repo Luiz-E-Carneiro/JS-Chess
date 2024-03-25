@@ -271,15 +271,15 @@ const blockDiagonals = (line, column, color, directions, piece) => {
             }
 
             if (!stopConditionPiece && cell && !cell.piece) {
-                if (direc === 'topRight') topRight.push(cell)
-                if (direc === 'topLeft') topLeft.push(cell)
-                if (direc === 'bottomLeft') bottomLeft.push(cell)
+                if (direc === 'topRight')    topRight.push(cell)
+                if (direc === 'topLeft')     topLeft.push(cell)
+                if (direc === 'bottomLeft')  bottomLeft.push(cell)
                 if (direc === 'bottomRight') bottomRight.push(cell)
             }
             else if (!stopConditionPiece && cell && cell.piece) {
-                if (direc === 'topRight') topRight.push(cell)
-                if (direc === 'topLeft') topLeft.push(cell)
-                if (direc === 'bottomLeft') bottomLeft.push(cell)
+                if (direc === 'topRight')    topRight.push(cell)
+                if (direc === 'topLeft')     topLeft.push(cell)
+                if (direc === 'bottomLeft')  bottomLeft.push(cell)
                 if (direc === 'bottomRight') bottomRight.push(cell)
                 stopConditionPiece = true
             }

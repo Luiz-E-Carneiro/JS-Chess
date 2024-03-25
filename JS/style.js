@@ -5,7 +5,6 @@ const board = document.getElementById('board')
 const captureArea = document.getElementsByClassName('capture-area')
 
 defaultStyle.addEventListener('click', function () {
-    console.log(board.className);
     if (board.className === 'board') return
     board.classList.add('board')
     board.classList.remove('board3D')

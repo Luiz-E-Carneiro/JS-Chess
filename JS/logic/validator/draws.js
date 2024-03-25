@@ -50,7 +50,7 @@ const verifyRepetition = (lastPlace, currentPlace) => {
         movementHistory.player2.before = lastPlace
         movementHistory.player2.now = currentPlace
     }
-    if(rep1 === 3 && rep2 === 3){
+    if (rep1 === 3 && rep2 === 3) {
         finishGame(false, 'Draw: Repetition')
     }
 }
@@ -91,10 +91,10 @@ const verifyPiecesAmount = (array1, array2) => {
 
         if (condition1 && condition2) finishGame(false, 'Draw: Insufficient Material')
 
-    } else if (array1.length === 1 && array2.length === 3 || array1.length === 3 && array2.length === 1) {
+    } else if (array1.length === 2 && array2.length === 3 || array1.length === 3 && array2.length === 2) {
         let justOne
         let withouKing
-        if (array1 > 1) {
+        if (array1.length > array2.length) {
             withouKing = array1.filter(objPiece => objPiece.piece.name != 'king')
             justOne = array2
         } else {
@@ -112,36 +112,31 @@ const verifyPiecesAmount = (array1, array2) => {
     }
 }
 
-
 const verifyDrownedKing = (arrayPieces) => {
-    let notDrowned = true
+    let kingDrowned = true
     arrayPieces.forEach(pieceObj => {
         switch (pieceObj.piece.name) {
             case 'pawn':
-                if (pawnPath(pieceObj, false, true)) notDrowned = false
+                if (pawnPath(pieceObj, false, true)) kingDrowned = false
                 break;
             case 'kight':
-                if (knightPath(pieceObj, false, true)) notDrowned = false
+                if (knightPath(pieceObj, false, true)) kingDrowned = false
                 break;
             case 'bishop':
-                if (bishopPath(pieceObj, false, true)) notDrowned = false
-
+                if (bishopPath(pieceObj, false, true)) kingDrowned = false
                 break;
             case 'rook':
-                if (rookPath(pieceObj, false, true)) notDrowned = false
-
+                if (rookPath(pieceObj, false, true)) kingDrowned = false
                 break;
             case 'queen':
-                if (queenPath(pieceObj, false, true)) notDrowned = false
-
+                if (queenPath(pieceObj, false, true)) kingDrowned = false
                 break;
             case 'king':
-                if (kingPath(pieceObj, false, true)) notDrowned = false
+                if (kingPath(pieceObj, false, true) ) kingDrowned = false
                 break;
         }
     });
-    console.log(notDrowned);
-    return notDrowned
+    return kingDrowned
 }
 
 function _50Moves(movedPiece, newSpotPiece) {

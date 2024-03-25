@@ -92,9 +92,9 @@ const movePiece = (newSpot) => {
     }
 
     incrementation()
-    gameVerifications()
     verifyRepetition(currentObj, newSpot)
     gameRefresh()
+    gameVerifications()
 }
 
 
@@ -140,10 +140,10 @@ const verificationDrownedKing = (pieces) => {
 
 
 function gameRefresh() {
+    resetBlockedCells()
     refresh()
     resetLimits()
     resetCheck()
-    resetBlockedCells()
 
     validateCheck()
     verificCheck()
