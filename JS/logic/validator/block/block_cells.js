@@ -26,7 +26,7 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
         if (cellsArray.length > 0) {
             cellsArray.forEach(direction => {
                 direction.forEach(objSpot => {
-                    
+                   
                     if (color === 'white') {
                         objSpot.blackKingCannotStay = true
                         cellsBlocked.white.push(objSpot)
@@ -49,7 +49,7 @@ const blockCellsToKing = (cellsArray, pieceObj) => {
     }
 }
 
-const blockOppositeCell = (kingObj, basedCell) => { 
+const blockOppositeCell = (kingObj, basedCell) => {
     let kingColor   = kingObj.piece.color
     let kingColumn  = kingObj.column
     let kingLine    = kingObj.line
@@ -76,14 +76,13 @@ const blockOppositeCell = (kingObj, basedCell) => {
             newLine = kingLine + 1
         }
     }
-    if(newColumn != undefined && newLine != undefined){   
-        if(kingColor === 'white'){
-            boardObj[newLine][newColumn].whiteKingCannotStay = true
-            cellsBlocked.white.push(boardObj[newLine][newColumn])
-        }else {
-            boardObj[newLine][newColumn].blackKingCannotStay = true
-            cellsBlocked.black.push(boardObj[newLine][newColumn])
-        }
+
+    if(kingColor === 'white'){
+        boardObj[newLine][newColumn].whiteKingCannotStay = true
+        cellsBlocked.white.push(boardObj[newLine][newColumn])
+    }else {
+        boardObj[newLine][newColumn].blackKingCannotStay = true
+        cellsBlocked.black.push(boardObj[newLine][newColumn])
     }
 }
 
@@ -91,7 +90,7 @@ const resetBlockedCells = () => {
 
     reset(cellsBlocked.black, 'black')
     reset(cellsBlocked.white, 'white')
-    
+   
         cellsBlocked = {
             black: [],
             white: []
@@ -271,15 +270,15 @@ const blockDiagonals = (line, column, color, directions, piece) => {
             }
 
             if (!stopConditionPiece && cell && !cell.piece) {
-                if (direc === 'topRight')    topRight.push(cell)
-                if (direc === 'topLeft')     topLeft.push(cell)
-                if (direc === 'bottomLeft')  bottomLeft.push(cell)
+                if (direc === 'topRight') topRight.push(cell)
+                if (direc === 'topLeft') topLeft.push(cell)
+                if (direc === 'bottomLeft') bottomLeft.push(cell)
                 if (direc === 'bottomRight') bottomRight.push(cell)
             }
             else if (!stopConditionPiece && cell && cell.piece) {
-                if (direc === 'topRight')    topRight.push(cell)
-                if (direc === 'topLeft')     topLeft.push(cell)
-                if (direc === 'bottomLeft')  bottomLeft.push(cell)
+                if (direc === 'topRight') topRight.push(cell)
+                if (direc === 'topLeft') topLeft.push(cell)
+                if (direc === 'bottomLeft') bottomLeft.push(cell)
                 if (direc === 'bottomRight') bottomRight.push(cell)
                 stopConditionPiece = true
             }
