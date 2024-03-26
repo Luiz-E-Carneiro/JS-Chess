@@ -54,9 +54,6 @@ const movePiece = (newSpot) => {
     // Add img in the new cell
     newSpot.cell.appendChild(img)
 
-    //50 Moves Verify
-    _50Moves(name, newSpot.piece.name)
-
     // get infos in main obj (boardObj)
     var newColumn = newSpot.column
     var newLine = newSpot.line
@@ -90,6 +87,9 @@ const movePiece = (newSpot) => {
         whiteGiveUp.disabled ? whiteGiveUp.disabled = false : whiteGiveUp.disabled = true
         blackGiveUp.disabled ? blackGiveUp.disabled = false : blackGiveUp.disabled = true
     }
+    
+    //50 Moves Verify
+    _50Moves(name, newSpot.piece.name)
 
     incrementation()
     verifyRepetition(currentObj, newSpot)
