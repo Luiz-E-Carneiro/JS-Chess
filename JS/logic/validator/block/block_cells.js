@@ -55,7 +55,7 @@ const blockOppositeCell = (kingObj, basedCell) => {
     let kingLine    = kingObj.line
     let basedColumn = basedCell.column
     let basedLine   = basedCell.line
-    let existCell
+    let existCell = true
     let newColumn
     let newLine
 
@@ -81,6 +81,7 @@ const blockOppositeCell = (kingObj, basedCell) => {
     } else {
         existCell = false
     }
+
     if(!existCell) return
     if(kingColor === 'white'){
         boardObj[newLine][newColumn].whiteKingCannotStay = true
