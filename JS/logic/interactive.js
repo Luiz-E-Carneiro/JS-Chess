@@ -292,7 +292,7 @@ const blackGiveUp = document.getElementById('blackGiveUp')
 
 whiteGiveUp.addEventListener('click', () => finishGame())
 blackGiveUp.addEventListener('click', () => finishGame())
-let declineSound = new Audio('./../assets/sounds/decline.mp3')
+let declineSound = new Audio('assets/sounds/decline.mp3')
 
 // Offer Draw
 const whiteDraw = document.getElementById('whiteDraw')
