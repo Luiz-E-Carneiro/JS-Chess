@@ -55,40 +55,33 @@ const blockOppositeCell = (kingObj, basedCell) => {
     let kingLine    = kingObj.line
     let basedColumn = basedCell.column
     let basedLine   = basedCell.line
-    let existCell = true
     let newColumn
     let newLine
-
-    if(kingColumn != 7 && kingColumn != 0) {
-        if(basedColumn > kingColumn) {
-            newColumn = kingColumn - 1
-        } else if (basedColumn === kingColumn){
-            newColumn = kingColumn
-        } else {
-            newColumn = kingColumn + 1
-        }
+    
+    if(basedColumn > kingColumn) {
+        newColumn = kingColumn - 1
+    } else if (basedColumn === kingColumn){
+        newColumn = kingColumn
     } else {
-        existCell = false
-    }
-    if(kingLine != 7 && kingLine != 0) {
-        if(basedLine > kingLine) {
-            newLine = kingLine - 1
-        } else if (basedLine === kingLine){
-            newLine = kingLine
-        } else {
-            newLine = kingLine + 1
-        }
-    } else {
-        existCell = false
+        newColumn = kingColumn + 1
     }
 
-    if(!existCell) return
-    if(kingColor === 'white'){
-        boardObj[newLine][newColumn].whiteKingCannotStay = true
-        cellsBlocked.white.push(boardObj[newLine][newColumn])
-    }else {
-        boardObj[newLine][newColumn].blackKingCannotStay = true
-        cellsBlocked.black.push(boardObj[newLine][newColumn])
+    if(basedLine > kingLine) {
+        newLine = kingLine - 1
+    } else if (basedLine === kingLine){
+        newLine = kingLine
+    } else {
+        newLine = kingLine + 1
+    }
+
+    if(newLine <= 7 && newLine >= 0 && newColumn <= 7 && newColumn >= 0 ) {
+        if(kingColor === 'white'){
+            boardObj[newLine][newColumn].whiteKingCannotStay = true
+            cellsBlocked.white.push(boardObj[newLine][newColumn])
+        }else {
+            boardObj[newLine][newColumn].blackKingCannotStay = true
+            cellsBlocked.black.push(boardObj[newLine][newColumn])
+        }
     }
 }
 
@@ -132,8 +125,8 @@ const blockVerticalHorizontal = (line, column, color, directions, piece) => {
             switch (direc) {
                 case 'left':
                     if (column - j >= 0) {
-                        cell = boardObj[line][column - j];
-                        stopBoardCondition = column - j === 0;
+                        cell = boardObj[line][column - j]
+                        stopBoardCondition = column - j === 0
                         untilKing.left.push(cell)
                         if (cell.piece.name === 'king' && cell.piece.color != color) {
                             verificDefendingPiece(untilKing.left, piece, direc)
@@ -202,6 +195,7 @@ const blockVerticalHorizontal = (line, column, color, directions, piece) => {
     }
     blockCellsToKing([right, left, up, down], pieceObj)
 }
+
 const blockDiagonals = (line, column, color, directions, piece) => {
     var pieceObj = boardObj[line][column]
     untilKing = {
