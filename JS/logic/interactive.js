@@ -472,6 +472,7 @@ const stopTimerShaking = () => {
 // Lines 
 
 function decreaseTime(minutesElement, secondsElement) {
+    if(gameEnded) return
     let secs = parseInt(secondsElement.innerText)
     let mins = parseInt(minutesElement.innerText)
 
