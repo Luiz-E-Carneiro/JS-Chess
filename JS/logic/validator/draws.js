@@ -8,6 +8,10 @@ const draw = (btn1, btn2) => {
 }
 
 const addHalfPoints = () => {
+    const numberOfDraws = document.getElementById('numberOfDraws')
+    let add1 = Number(numberOfDraws.innerText) + 1
+    numberOfDraws.innerText = ''
+    numberOfDraws.innerText += (add1 < 10 ? numberOfDraws.innerText = "0" + add1 : numberOfDraws.innerText = add1)
     gameEnded = true
     let drawSound = new Audio('./../assets/sounds/game-draw.mp3')
     drawSound.play()

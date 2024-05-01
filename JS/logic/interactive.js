@@ -208,6 +208,8 @@ const finishGame = (drownedKing = false, draw = false) => {
 // Reset Score
 const resetScoreBtn = document.getElementById('resetBtn')
 resetScoreBtn.addEventListener('click', function () {
+    const numberOfDraws = document.getElementById('numberOfDraws')
+    numberOfDraws.innerText = "00"
     pointsP1.innerText = '0.0'
     pointsP2.innerText = '0.0'
 })
@@ -470,6 +472,7 @@ const stopTimerShaking = () => {
 // Lines 
 
 function decreaseTime(minutesElement, secondsElement) {
+    if(gameEnded) return
     let secs = parseInt(secondsElement.innerText)
     let mins = parseInt(minutesElement.innerText)
 
