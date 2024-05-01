@@ -66,6 +66,10 @@ const resetLimits = ( ) => {
         if(cellObj.onlyTRBL) delete boardObj[line][column].onlyTRBL
         if(cellObj.cannotMove) delete boardObj[line][column].cannotMove
         if(cellObj.onlyCapture) delete boardObj[line][column].onlyCapture
+        if(cellObj.onlyCaptureTR) delete boardObj[line][column].onlyCaptureTR
+        if(cellObj.onlyCaptureTL) delete boardObj[line][column].onlyCaptureTL
+        if(cellObj.onlyTLBR) delete boardObj[line][column].onlyTLBR
+        if(cellObj.onlyTRBL) delete boardObj[line][column].onlyTRBL
     });
     defendPieces = []
     attackingPieces = []
