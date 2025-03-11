@@ -232,7 +232,7 @@ function changeName(btn, color) {
         btn.innerHTML = `<span class="material-symbols-outlined">done_outline</span>`
 
         let inputName = document.createElement('input')
-        inputName.maxLength = 10
+        inputName.maxLength = 7
         inputName.classList.add('inputName')
         var name
 
